@@ -1,0 +1,10 @@
+{
+  "name": "petafinds-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.log('static site ready')\""
+  }
+}
