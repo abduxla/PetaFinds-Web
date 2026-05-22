@@ -571,6 +571,70 @@
         const syncAppCards = (activeIndex = 1) => appCards.forEach((card, index) => { card.classList.remove("app-card-active", "app-card-left", "app-card-right"); card.classList.add(index === activeIndex ? "app-card-active" : ((index - activeIndex + appCards.length) % appCards.length === 1 ? "app-card-right" : "app-card-left")); });
         appCards.forEach((card, index) => card.addEventListener("mouseenter", () => syncAppCards(index))); syncAppCards(1);
 
+        const businessCta = document.querySelector(".business-cta");
+        if (businessCta && !businessCta.querySelector(".business-map-overlay")) {
+          const map = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          map.setAttribute("class", "business-map-overlay");
+          map.setAttribute("viewBox", "0 0 1200 400");
+          map.setAttribute("preserveAspectRatio", "none");
+          map.setAttribute("aria-hidden", "true");
+          map.setAttribute("focusable", "false");
+          map.innerHTML = `
+            <line x1="0" y1="40" x2="1200" y2="58" /><line x1="0" y1="108" x2="1200" y2="92" />
+            <line x1="0" y1="176" x2="1200" y2="190" /><line x1="0" y1="250" x2="1200" y2="238" />
+            <line x1="0" y1="324" x2="1200" y2="340" /><line x1="72" y1="0" x2="86" y2="400" />
+            <line x1="160" y1="0" x2="150" y2="400" /><line x1="248" y1="0" x2="272" y2="400" />
+            <line x1="366" y1="0" x2="348" y2="400" /><line x1="460" y1="0" x2="486" y2="400" />
+            <line x1="588" y1="0" x2="572" y2="400" /><line x1="684" y1="0" x2="710" y2="400" />
+            <line x1="802" y1="0" x2="786" y2="400" /><line x1="914" y1="0" x2="938" y2="400" />
+            <line x1="1038" y1="0" x2="1016" y2="400" /><line x1="1144" y1="0" x2="1162" y2="400" />
+            <line x1="120" y1="0" x2="430" y2="400" /><line x1="340" y1="0" x2="760" y2="400" />
+            <line x1="610" y1="0" x2="990" y2="400" /><line x1="980" y1="0" x2="720" y2="400" />
+            <line x1="1180" y1="52" x2="850" y2="400" /><line x1="18" y1="358" x2="300" y2="0" />
+          `;
+          map.querySelectorAll("line").forEach((line) => {
+            line.setAttribute("stroke", "#ffffff");
+            line.setAttribute("stroke-width", "2");
+            line.setAttribute("stroke-linecap", "round");
+          });
+          businessCta.prepend(map);
+        }
+
+        const faqList = document.querySelector("#faq .faq-list");
+        if (faqList) {
+          faqList.querySelectorAll("summary").forEach((summary) => {
+            if (!summary.querySelector(".faq-chevron")) {
+              summary.insertAdjacentHTML("beforeend", `<svg class="faq-chevron" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M5 7l5 6 5-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`);
+            }
+          });
+          faqList.addEventListener("click", (event) => {
+            const summary = event.target.closest("summary");
+            if (!summary || !faqList.contains(summary)) return;
+            event.preventDefault();
+            const item = summary.closest("details");
+            const isOpen = item.classList.contains("faq-open");
+            faqList.querySelectorAll("details.faq-open").forEach((openItem) => {
+              openItem.classList.remove("faq-open");
+              setTimeout(() => { if (!openItem.classList.contains("faq-open")) openItem.open = false; }, 300);
+            });
+            if (!isOpen) {
+              item.open = true;
+              requestAnimationFrame(() => item.classList.add("faq-open"));
+            }
+          });
+        }
+
+        const finalCta = document.querySelector(".final-cta");
+        if (finalCta && !finalCta.querySelector(".final-pin-tag")) {
+          ["Sea St", "Keyzer St", "Front St", "Main St", "Pettah", "Sea St \u{1F9F5}", "Keyzer St \u2699\uFE0F", "Front St \u{1F336}\uFE0F"].forEach((label) => {
+            const tag = document.createElement("span");
+            tag.className = "final-pin-tag";
+            tag.textContent = label;
+            finalCta.appendChild(tag);
+          });
+        }
+        observeOnce(finalCta, () => finalCta && finalCta.classList.add("footer-cta-visible"));
+
         if (header) {
           let lastScrollPosition = window.scrollY;
           let lastTriggerPosition = window.scrollY;
@@ -595,6 +659,12 @@
           requestAnimationFrame(trackNavbar);
         }
       });
+      // MANUAL CHECKS BEFORE LAUNCH:
+      // 1. Run Lighthouse — target score >85
+      // 2. Check CLS = 0 in Performance tab
+      // 3. Test prefers-reduced-motion in DevTools → Rendering → Emulate media
+      // 4. Test on mobile viewport 375px width
+      // 5. Confirm no scroll event listeners exist (search "scroll" in JS)
     </script>
   </body>
 </html>
