@@ -12,6 +12,42 @@
   --border: #e8e8e4;
   --shadow: 0 18px 50px rgba(9, 88, 88, 0.12);
   --lift: 0 24px 70px rgba(17, 17, 16, 0.16);
+  --text-largetitle: clamp(2.5rem, 6vw, 4rem);
+  --text-title1: clamp(1.75rem, 4vw, 2.5rem);
+  --text-title2: clamp(1.375rem, 3vw, 1.75rem);
+  --text-title3: 1.25rem;
+  --text-body: 0.9375rem;
+  --text-callout: 0.875rem;
+  --text-footnote: 0.75rem;
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.04em;
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.6;
+  --shadow-1: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-2: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-3: 0 8px 24px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+  --shadow-4: 0 16px 40px rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.05);
+  --shadow-teal-2: 0 4px 16px rgba(9,88,88,0.14), 0 2px 4px rgba(9,88,88,0.08);
+  --shadow-teal-3: 0 8px 28px rgba(9,88,88,0.18), 0 4px 8px rgba(9,88,88,0.10);
+  --shadow-orange: 0 8px 24px rgba(232,130,26,0.25), 0 4px 8px rgba(232,130,26,0.12);
+  --spring-snappy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --spring-smooth: cubic-bezier(0.42, 0, 0.58, 1);
+  --spring-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --spring-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --spring-accelerate: cubic-bezier(0.4, 0.0, 1.0, 1.0);
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-deliberate: 800ms;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
 }
 
 * {
@@ -3172,4 +3208,128 @@ button:hover,
   .final-pin-tag {
     font-size: 11px;
   }
+}
+
+.material-ultrathin {
+  background: rgba(250,250,248,0.45);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.material-thin {
+  background: rgba(250,250,248,0.65);
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+.material-regular {
+  background: rgba(250,250,248,0.82);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.material-thick {
+  background: rgba(250,250,248,0.92);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+
+.material-thin.benefit,
+.material-thin.app-shot-card {
+  box-shadow: var(--shadow-2);
+}
+
+.material-regular.faq-surface {
+  box-shadow: var(--shadow-1);
+}
+
+.material-ultrathin.owner-pill-surface {
+  box-shadow: var(--shadow-teal-2);
+}
+
+.nav-cta,
+.primary-button,
+.store-button,
+.mobile-sticky-cta a,
+.street-pin-tag,
+.app-proof-pin,
+.final-pin-tag,
+.owner-strip span,
+.hero-trust-pills span {
+  border-radius: var(--radius-full);
+}
+
+.benefit,
+.app-shot-card,
+#faq .faq-list details,
+.setting-group,
+.merchant-products span,
+.metric-row span {
+  border-radius: var(--radius-md);
+}
+
+.nav-cta,
+.primary-button,
+.store-button,
+.mobile-sticky-cta a,
+.business-cta .primary-button,
+.final-cta .button-row a,
+#features .feature-list span {
+  transition: all var(--duration-fast) ease;
+}
+
+.steps li span {
+  transition: opacity 400ms var(--spring-snappy), transform 400ms var(--spring-snappy);
+}
+
+a,
+button,
+[role="button"],
+summary,
+.chip,
+.nav-cta,
+.primary-button,
+.store-button,
+.mobile-sticky-cta a,
+#features .feature-list span {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+button:active,
+a:active,
+.chip:active {
+  transform: scale(0.97);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(9,88,88,0.25);
+  border-radius: var(--radius-full);
+}
+
+::selection {
+  background: rgba(13,110,110,0.2);
+  color: #095858;
+}
+
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #0D6E6E;
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
 }
