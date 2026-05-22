@@ -3,18 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PetaFinds | Colombo's wholesale marketplace</title>
+    <title>PetaFinds - Pettah Wholesale Market Colombo | Find Businesses &amp; Products</title>
     <meta
       name="description"
-      content="Discover verified Pettah businesses, wholesale products, favourites, maps, and business listings with PetaFinds."
+      content="Find Pettah wholesale market Colombo businesses and products with PetaFinds, a Sri Lanka wholesale marketplace for shops, suppliers, maps, and seller details."
     />
-    <meta property="og:title" content="PetaFinds | Colombo's wholesale marketplace" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://petafinds.lk/" />
+    <meta property="og:title" content="PetaFinds - Pettah Wholesale Market Colombo" />
     <meta
       property="og:description"
-      content="Find verified local businesses, compare products, save favourites, and explore Colombo's wholesale marketplace faster."
+      content="Search Pettah shops and products, compare wholesale suppliers in Colombo 11, save favourites, and explore Sri Lanka's wholesale marketplace faster."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://petafinds.lk/" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PetaFinds - Pettah Wholesale Market Colombo" />
+    <meta
+      name="twitter:description"
+      content="Find Pettah wholesale market Colombo businesses, products, suppliers, maps, and seller details with PetaFinds."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -47,7 +55,8 @@
           <p class="eyebrow pill">Colombo's wholesale marketplace</p>
           <h1>Discover Pettah's wholesale market from your phone.</h1>
           <p class="lead">
-            Find verified local businesses, compare products, save favourites, and explore Colombo's wholesale marketplace faster.
+            Find Pettah wholesale market Colombo shops, compare products from wholesale suppliers in Colombo 11, save favourites,
+            and explore Sri Lanka's wholesale marketplace faster.
           </p>
           <div id="download" class="button-row">
             <a class="store-button" data-link="APP_STORE_URL" href="#">
@@ -117,8 +126,8 @@
         <div class="wrap trust-grid">
           <span>Built for Pettah</span>
           <span>Verified businesses</span>
-          <span>Wholesale discovery</span>
-          <span>Local-first marketplace</span>
+          <span>Pettah shops and products</span>
+          <span>Sri Lanka wholesale marketplace</span>
         </div>
       </section>
 
@@ -126,7 +135,7 @@
         <div class="section-head">
           <p class="eyebrow">For customers</p>
           <h2>Move through Pettah with sharper eyes.</h2>
-          <p>Search before you walk, save what matters, and find seller details without wasting market time.</p>
+          <p>Search Pettah shops and products before you walk, save what matters, and find seller details without wasting market time.</p>
         </div>
         <div class="card-grid five">
           <article class="benefit"><i></i><h3>Find products faster</h3></article>
@@ -142,7 +151,7 @@
           <div class="section-head">
             <p class="eyebrow">For businesses</p>
             <h2>Turn your shop into a searchable storefront.</h2>
-            <p>Help customers find your business, browse your products, and trust what you offer before they visit.</p>
+            <p>Help customers find your business, browse your products, and trust what you offer as a wholesale supplier in Colombo 11 before they visit.</p>
           </div>
           <div class="owner-strip">
             <span>List once</span>
@@ -164,6 +173,7 @@
           <div class="section-head left">
             <p class="eyebrow">Features</p>
             <h2>Everything needed for discovery.</h2>
+            <p>PetaFinds brings the Pettah wholesale market Colombo experience into one searchable local marketplace for businesses, products, maps, and saved items.</p>
           </div>
           <div class="feature-list">
             <span>Featured product carousel</span>
@@ -282,7 +292,7 @@
           <div>
             <p class="eyebrow">Business CTA</p>
             <h2>Own a shop in Pettah?</h2>
-            <p>List your business and products so customers can find you before they even enter the market.</p>
+            <p>List your business and products so customers can find your Pettah shop before they even enter the market.</p>
           </div>
           <a class="primary-button" data-link="BUSINESS_SIGNUP_URL" href="#business">Join as a Business</a>
         </div>
@@ -296,7 +306,7 @@
         <div class="faq-list">
           <details>
             <summary>What is PetaFinds?</summary>
-            <p>PetaFinds is a discovery and listing-first platform for Pettah businesses and wholesale products.</p>
+            <p>PetaFinds is a discovery and listing-first platform for Pettah businesses, wholesale products, and suppliers in Colombo 11.</p>
           </details>
           <details>
             <summary>Is PetaFinds a shopping app?</summary>
@@ -312,7 +322,7 @@
           </details>
           <details>
             <summary>Is it only for Pettah?</summary>
-            <p>PetaFinds starts with Pettah and Colombo's wholesale market, with local discovery as the focus.</p>
+            <p>PetaFinds starts with Pettah and Colombo's wholesale market, with local discovery for Sri Lanka's wholesale marketplace as the focus.</p>
           </details>
           <details>
             <summary>When will the app launch?</summary>
@@ -337,7 +347,7 @@
       <div class="wrap footer-grid">
         <div>
           <a class="logo" href="#home"><span class="logo-mark"><span class="logo-p">P</span><span class="logo-dot"></span></span><span>PetaFinds<span class="dot">.</span></span></a>
-          <p>Colombo's wholesale marketplace.</p>
+          <p>Pettah wholesale market Colombo discovery for shops, suppliers, and products.</p>
           <p>Contact: hello@petafinds.com</p>
         </div>
         <div class="footer-links">
@@ -364,6 +374,143 @@
       document.querySelectorAll("[data-link]").forEach((link) => {
         const value = window.PETAFINDS_LINKS && window.PETAFINDS_LINKS[link.dataset.link];
         if (value) link.href = value;
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const header = document.querySelector(".site-header");
+        const hero = document.querySelector(".hero");
+        const headline = document.querySelector(".hero h1");
+
+        if (hero && !hero.querySelector(".hero-street-pattern")) {
+          const pattern = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          pattern.setAttribute("class", "hero-street-pattern");
+          pattern.setAttribute("viewBox", "0 0 800 600");
+          pattern.setAttribute("preserveAspectRatio", "none");
+          pattern.setAttribute("aria-hidden", "true");
+          pattern.setAttribute("focusable", "false");
+          pattern.innerHTML = `
+            <path d="M28 42 L178 36 L186 119 L34 128 Z" />
+            <path d="M214 26 L368 38 L354 128 L208 116 Z" />
+            <path d="M420 48 L586 42 L592 146 L406 138 Z" />
+            <path d="M626 34 L768 52 L756 132 L620 122 Z" />
+            <path d="M58 170 L194 160 L204 256 L44 248 Z" />
+            <path d="M238 154 L384 166 L374 276 L226 268 Z" />
+            <path d="M432 178 L548 160 L570 270 L418 286 Z" />
+            <path d="M600 172 L758 164 L744 286 L612 278 Z" />
+            <path d="M18 318 L164 306 L178 428 L30 440 Z" />
+            <path d="M202 314 L350 302 L364 414 L190 426 Z" />
+            <path d="M402 320 L596 306 L582 440 L414 430 Z" />
+            <path d="M632 320 L782 304 L770 438 L646 450 Z" />
+            <path d="M74 474 L252 458 L264 560 L62 552 Z" />
+            <path d="M304 468 L494 454 L510 572 L292 560 Z" />
+            <path d="M546 468 L760 452 L774 564 L536 574 Z" />
+          `;
+          pattern.querySelectorAll("path").forEach((path) => {
+            path.setAttribute("fill", "none");
+            path.setAttribute("stroke", "#0D6E6E");
+            path.setAttribute("stroke-width", "2");
+            path.setAttribute("stroke-opacity", "0.06");
+            path.setAttribute("stroke-linecap", "round");
+            path.setAttribute("stroke-linejoin", "round");
+          });
+          hero.prepend(pattern);
+        }
+
+        if (hero && !hero.querySelector(".street-pin-tag")) {
+          ["Sea St 🧵", "Keyzer St ⚙️", "Front St 🌶️", "Main St 🛒", "Keyzer St 💎"].forEach((label, index) => {
+            const tag = document.createElement("span");
+            tag.className = `street-pin-tag street-pin-tag--${index + 1}`;
+            tag.textContent = label;
+            hero.appendChild(tag);
+          });
+        }
+
+        if (headline && !headline.querySelector(".headline-word")) {
+          const words = headline.textContent.trim().split(/\s+/);
+          headline.textContent = "";
+          words.forEach((word, index) => {
+            const span = document.createElement("span");
+            span.className = "headline-word";
+            span.textContent = word;
+            headline.appendChild(span);
+            if (index < words.length - 1) headline.appendChild(document.createTextNode(" "));
+          });
+
+          const trustPills = document.createElement("div");
+          trustPills.className = "hero-trust-pills";
+          ["Verified businesses", "Map discovery", "Seller details"].forEach((label) => {
+            const pill = document.createElement("span");
+            pill.textContent = label;
+            trustPills.appendChild(pill);
+          });
+          headline.insertAdjacentElement("afterend", trustPills);
+
+          const headlineWords = headline.querySelectorAll(".headline-word");
+          const pills = trustPills.querySelectorAll("span");
+
+          if (reduceMotion) {
+            headlineWords.forEach((word) => word.classList.add("is-visible"));
+            pills.forEach((pill) => pill.classList.add("is-visible"));
+          } else {
+            headlineWords.forEach((word, index) => {
+              setTimeout(() => word.classList.add("is-visible"), index * 80);
+            });
+            const pillStart = Math.max(0, (headlineWords.length - 1) * 80 + 400);
+            pills.forEach((pill, index) => {
+              setTimeout(() => pill.classList.add("is-visible"), pillStart + index * 150);
+            });
+          }
+        }
+
+        const revealTargets = document.querySelectorAll(
+          ".hero-visual, .lead, .button-row, .proof-panel, .trust-grid span, .section-head, .benefit, .feature-list span, .phone-pair, .steps, .app-shot-card, .cta-inner, .faq-list, .final-cta .wrap, .footer-grid"
+        );
+
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          revealTargets.forEach((target) => target.classList.add("is-visible"));
+        } else {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15 }
+          );
+
+          revealTargets.forEach((target) => {
+            target.classList.add("is-reveal");
+            observer.observe(target);
+          });
+        }
+
+        if (header) {
+          let lastScrollPosition = window.scrollY;
+          let lastTriggerPosition = window.scrollY;
+
+          const trackNavbar = () => {
+            const currentScrollPosition = window.scrollY;
+            const delta = currentScrollPosition - lastScrollPosition;
+
+            if (Math.abs(currentScrollPosition - lastTriggerPosition) > 10) {
+              if (delta > 0 && currentScrollPosition > header.offsetHeight) {
+                header.classList.add("is-hidden");
+              } else if (delta < 0 || currentScrollPosition <= 0) {
+                header.classList.remove("is-hidden");
+              }
+              lastTriggerPosition = currentScrollPosition;
+            }
+
+            lastScrollPosition = currentScrollPosition;
+            requestAnimationFrame(trackNavbar);
+          };
+
+          requestAnimationFrame(trackNavbar);
+        }
       });
     </script>
   </body>
