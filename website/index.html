@@ -488,6 +488,89 @@
           });
         }
 
+        const observeOnce = (target, callback) => {
+          if (!target) return;
+          if (reduceMotion || !("IntersectionObserver" in window)) {
+            callback();
+            return;
+          }
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  callback();
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15 }
+          );
+          observer.observe(target);
+        };
+
+        const revealStagger = (items, visibleClass, delay) => {
+          items.forEach((item, index) => {
+            if (reduceMotion) {
+              item.classList.add(visibleClass);
+            } else {
+              setTimeout(() => item.classList.add(visibleClass), index * delay);
+            }
+          });
+        };
+
+        const customerItems = [...document.querySelectorAll("#customers .benefit")];
+        customerItems.forEach((item) => item.classList.add("customer-slide-item"));
+        observeOnce(document.querySelector("#customers .card-grid"), () => revealStagger(customerItems, "customer-slide-visible", 100));
+
+        const business = document.querySelector("#business");
+        if (business && !business.querySelector(".business-blob-svg")) {
+          const blob = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          blob.setAttribute("class", "business-blob-svg");
+          blob.setAttribute("viewBox", "0 0 500 500");
+          blob.setAttribute("aria-hidden", "true");
+          blob.setAttribute("focusable", "false");
+          blob.innerHTML = `<path fill="#0D6E6E" d="M423 304C398 386 315 457 230 436C146 416 52 356 45 264C38 171 111 82 203 57C296 32 407 66 445 153C482 239 449 223 423 304Z" />`;
+          business.prepend(blob);
+        }
+
+        const businessItems = [...document.querySelectorAll("#business .benefit")];
+        businessItems.forEach((item) => item.classList.add("business-slide-item"));
+        observeOnce(document.querySelector("#business .card-grid"), () => revealStagger(businessItems, "business-slide-visible", 100));
+
+        const featureCards = [...document.querySelectorAll("#features .phone-pair .phone")];
+        observeOnce(document.querySelector("#features .phone-pair"), () => revealStagger(featureCards, "feature-card-visible", 150));
+
+        const stepsGrid = document.querySelector(".section-white .steps-grid");
+        if (stepsGrid && !stepsGrid.querySelector(".steps-connector")) {
+          const connector = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          connector.setAttribute("class", "steps-connector");
+          connector.setAttribute("viewBox", "0 0 1000 170");
+          connector.setAttribute("preserveAspectRatio", "none");
+          connector.setAttribute("aria-hidden", "true");
+          connector.setAttribute("focusable", "false");
+          connector.innerHTML = `<path pathLength="1" d="M30 94 C150 18 255 18 375 86 S615 153 735 80 S900 30 970 95" />`;
+          stepsGrid.prepend(connector);
+        }
+        const stepItems = [...document.querySelectorAll(".section-white .steps li")];
+        observeOnce(stepsGrid, () => {
+          const connector = stepsGrid && stepsGrid.querySelector(".steps-connector");
+          if (connector) connector.classList.add("steps-connector-visible");
+          revealStagger(stepItems, "step-number-visible", 100);
+        });
+
+        const appGrid = document.querySelector(".app-shot-grid");
+        if (appGrid && !appGrid.querySelector(".app-proof-pin")) {
+          ["Sea St 🧵", "Main St 🛒", "Front St 🌶️", "Keyzer St 💎"].forEach((label, index) => {
+            const tag = document.createElement("span");
+            tag.className = `app-proof-pin app-proof-pin--${index + 1}`;
+            tag.textContent = label;
+            appGrid.appendChild(tag);
+          });
+        }
+        const appCards = [...document.querySelectorAll(".app-shot-card")];
+        const syncAppCards = (activeIndex = 1) => appCards.forEach((card, index) => { card.classList.remove("app-card-active", "app-card-left", "app-card-right"); card.classList.add(index === activeIndex ? "app-card-active" : ((index - activeIndex + appCards.length) % appCards.length === 1 ? "app-card-right" : "app-card-left")); });
+        appCards.forEach((card, index) => card.addEventListener("mouseenter", () => syncAppCards(index))); syncAppCards(1);
+
         if (header) {
           let lastScrollPosition = window.scrollY;
           let lastTriggerPosition = window.scrollY;
