@@ -3551,7 +3551,7 @@ main > section.section.wrap:has(.app-shot-grid) {
   }
 
   .hero {
-    padding-bottom: clamp(48px, 8vw, 64px);
+    padding-bottom: clamp(42px, 8vw, 60px);
   }
 
   .section-gap-pin {
