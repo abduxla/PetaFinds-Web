@@ -28,20 +28,33 @@ function createStaticServer() {
   return http.createServer((req, res) => {
     const url = new URL(req.url, `http://${req.headers.host}`);
     const requested = url.pathname === "/" ? "/index.html" : decodeURIComponent(url.pathname);
-    const filePath = path.normalize(path.join(root, requested));
+    let filePath = path.normalize(path.join(root, requested));
 
     if (!filePath.startsWith(root)) {
       send(res, 403, "Forbidden");
       return;
     }
 
-    fs.readFile(filePath, (error, data) => {
-      if (error) {
-        send(res, 404, "Not found");
+    fs.stat(filePath, (statError, stats) => {
+      if (!statError && stats.isDirectory()) {
+        filePath = path.join(filePath, "index.html");
+      } else if (statError && !path.extname(filePath)) {
+        filePath = path.join(root, requested, "index.html");
+      }
+
+      if (!filePath.startsWith(root)) {
+        send(res, 403, "Forbidden");
         return;
       }
 
-      send(res, 200, data, types[path.extname(filePath)] || "application/octet-stream");
+      fs.readFile(filePath, (error, data) => {
+        if (error) {
+          send(res, 404, "Not found");
+          return;
+        }
+
+        send(res, 200, data, types[path.extname(filePath)] || "application/octet-stream");
+      });
     });
   });
 }
