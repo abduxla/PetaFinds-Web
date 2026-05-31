@@ -635,6 +635,23 @@
         }
         observeOnce(finalCta, () => finalCta && finalCta.classList.add("footer-cta-visible"));
 
+        [
+          { section: document.querySelector("#customers"), labels: ["Sea St", "Main St", "Pettah"] },
+          { section: document.querySelector(".app-shot-grid") && document.querySelector(".app-shot-grid").closest("section"), labels: ["Front St", "Keyzer St", "Sea St"] },
+          { section: document.querySelector("#faq"), labels: ["Main St", "Front St", "Keyzer St"] }
+        ].forEach(({ section, labels }) => {
+          if (!section || section.querySelector(".section-gap-pin")) return;
+          const line = document.createElement("span");
+          line.className = "section-transition-line";
+          section.appendChild(line);
+          labels.forEach((label, index) => {
+            const tag = document.createElement("span");
+            tag.className = `section-gap-pin section-gap-pin--${index + 1}`;
+            tag.textContent = label;
+            section.appendChild(tag);
+          });
+        });
+
         document.querySelectorAll(".benefit").forEach((card) => card.classList.add("feature-card", "material-thin"));
         document.querySelectorAll(".app-shot-card").forEach((card) => card.classList.add("material-thin"));
         document.querySelectorAll(".shot-phone").forEach((card) => card.classList.add("mockup-card"));
