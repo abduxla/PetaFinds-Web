@@ -3916,3 +3916,59 @@ body::after {
 .store-button[data-link="PLAY_STORE_URL"] {
   display: none !important;
 }
+
+/* =====================================================================
+   APP REDESIGN v2 — teal hero + flat calm sections
+   The app's signature is the teal-gradient home header / onboarding.
+   Make the hero a teal gradient panel with white text + white buttons,
+   and strip the remaining decorative pseudo-elements so sections read as
+   the app's clean, flat surfaces.
+   ===================================================================== */
+
+/* Teal gradient hero panel (mirrors the app home header & onboarding) */
+.hero {
+  color: #fff !important;
+  background: linear-gradient(160deg, #0a4a4a 0%, #0d6e6e 55%, #13807e 100%) !important;
+  border-radius: 28px !important;
+  padding: 52px clamp(20px, 4vw, 44px) 60px !important;
+  margin-top: 18px !important;
+}
+.hero::before,
+.hero::after { display: none !important; }
+.hero-visual::before { display: none !important; }
+
+.hero h1 { color: #fff !important; }
+.hero .lead { color: rgba(255, 255, 255, 0.86) !important; }
+
+/* Eyebrow + value chips read as glass on teal */
+.hero .eyebrow.pill,
+.hero .proof-panel span,
+.hero-trust-pills span {
+  background: rgba(255, 255, 255, 0.13) !important;
+  border: 1px solid rgba(255, 255, 255, 0.24) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+/* On teal, the store buttons flip to a white pill with teal text
+   (exactly the app onboarding's "Continue as Customer" button) */
+.hero .store-button {
+  background: #fff !important;
+  color: var(--teal) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18) !important;
+}
+.hero .store-button small { color: var(--muted) !important; }
+.hero .store-icon {
+  background: var(--teal-light) !important;
+  color: var(--teal) !important;
+}
+
+/* Flatten leftover decorative pseudo-elements → calm app surfaces */
+.section::after,
+.section:nth-of-type(odd)::after,
+.section-alt::before,
+.business-cta::before,
+.trust-strip::before,
+.trust-strip::after {
+  display: none !important;
+}
