@@ -3806,3 +3806,113 @@ main > section.section.wrap:has(.app-shot-grid) {
     grid-template-columns: 1fr;
   }
 }
+
+/* =====================================================================
+   APP-THEME ALIGNMENT
+   Makes the site feel like the PetaFinds mobile app: same calm, flat,
+   card-based look — strip the busy "Pettah street/map" decoration, clean
+   the surfaces, app-style buttons. Layered last so it overrides the
+   original landing styling without touching the markup/animation above.
+   ===================================================================== */
+
+/* 1. Calm, flat background (app uses a single soft surface) */
+body {
+  background: var(--bg) !important;
+}
+body::before,
+body::after {
+  display: none !important;
+}
+
+/* 2. Remove the decorative street/map flourishes the app doesn't have */
+.hero-street-pattern,
+.street-pin-tag,
+.market-orbit,
+.business-blob-svg,
+.business-map-overlay,
+.app-proof-pin,
+.section-gap-pin,
+.section-transition-line,
+.final-pin-tag,
+.steps-connector,
+.hero::before,
+.hero::after {
+  display: none !important;
+}
+
+/* 3. Header — clean, solid, app-like */
+.site-header {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* 4. Buttons — app style. Teal = primary app action (download),
+   orange = business action; both are the app's rounded pills with
+   white labels. */
+.store-button {
+  background: var(--teal) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-teal-2) !important;
+}
+.store-button .store-icon {
+  color: #fff !important;
+}
+.store-button small {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.primary-button {
+  background: var(--orange) !important;
+  color: #fff !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-orange) !important;
+}
+.nav-cta {
+  border-color: var(--teal) !important;
+  color: var(--teal) !important;
+}
+.nav-cta:hover {
+  background: var(--teal) !important;
+  color: #fff !important;
+}
+.mobile-sticky-cta a:first-child {
+  background: var(--teal) !important;
+  color: #fff !important;
+}
+
+/* 5. Cards & surfaces — white, hairline border, soft app shadow, app radius */
+.benefit,
+.feature-card,
+.app-shot-card,
+.steps,
+.proof-panel span,
+.faq-list details {
+  background: var(--white) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-2) !important;
+}
+/* The "for businesses" steps card stays a dark teal surface — mirrors the
+   app's dark cards and keeps a nice contrast beat. */
+.steps.dark {
+  background: var(--dark-teal) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+}
+
+/* 6. Eyebrows — small teal labels like the app's section headers */
+.eyebrow {
+  color: var(--teal) !important;
+}
+.eyebrow.pill {
+  background: var(--teal-light) !important;
+  border-color: transparent !important;
+  color: var(--teal) !important;
+}
+
+/* 7. iOS-only launch — hide the Google Play CTAs until Android ships
+   (re-enable by deleting this rule). */
+.store-button[data-link="PLAY_STORE_URL"] {
+  display: none !important;
+}
