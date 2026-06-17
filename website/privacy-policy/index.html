@@ -23,27 +23,34 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Nunito:wght@800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../styles.css?v=3" />
   </head>
   <body class="legal-page">
-    <header class="site-header">
-      <nav class="nav wrap" aria-label="Main navigation">
-        <a class="logo" href="../" aria-label="PetaFinds home">
-          <span class="logo-mark"><span class="logo-p">P</span><span class="logo-dot"></span></span>
-          <span>PetaFinds<span class="dot">.</span></span>
+    <header class="header">
+      <div class="container nav">
+        <a class="brand" href="../" aria-label="PetaFinds home">
+          <span class="brand-mark">P<i></i></span>
+          <span class="brand-name">PetaFinds<b>.</b></span>
         </a>
-        <div class="nav-links legal-nav-links">
+        <nav class="nav-links" aria-label="Primary">
           <a href="#privacy">Privacy</a>
           <a href="#terms">Terms</a>
           <a href="#support">Support</a>
           <a href="#reports">Reports</a>
-        </div>
-        <a class="nav-cta" href="../#download">Download App</a>
-      </nav>
+        </nav>
+        <a
+          class="btn btn-primary btn-sm nav-cta"
+          href="https://apps.apple.com/us/app/petafinds/id6774913835"
+          target="_blank"
+          rel="noopener"
+          >Get the app</a
+        >
+      </div>
     </header>
 
     <main>
-      <section class="legal-hero wrap" id="top">
+      <section class="legal-hero" id="top">
+        <div class="container">
         <p class="eyebrow pill">App Store legal center</p>
         <h1>Privacy, terms, and support for PetaFinds.</h1>
         <p class="lead">
@@ -55,9 +62,11 @@
           <a href="#support">Support Policy</a>
           <a href="#reports">Report and Takedown</a>
         </div>
+        </div>
       </section>
 
-      <section class="legal-shell wrap" aria-label="PetaFinds legal policies">
+      <section class="legal-body">
+        <div class="container legal-shell" aria-label="PetaFinds legal policies">
         <aside class="legal-side">
           <strong>Legal documents</strong>
           <a href="#privacy">Privacy Policy</a>
@@ -301,25 +310,38 @@
             <p class="legal-contact">Reports may be submitted in-app or by email: <a href="mailto:support@petafinds.lk">support@petafinds.lk</a></p>
           </article>
         </div>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="wrap footer-grid">
-        <div>
-          <a class="logo" href="../"><span class="logo-mark"><span class="logo-p">P</span><span class="logo-dot"></span></span><span>PetaFinds<span class="dot">.</span></span></a>
-          <p>Colombo's wholesale marketplace.</p>
-          <p>Contact: support@petafinds.lk</p>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="../">
+            <span class="brand-mark">P<i></i></span>
+            <span class="brand-name">PetaFinds<b>.</b></span>
+          </a>
+          <p>Sri Lanka's wholesale marketplace. Discover Pettah shops, products, and suppliers from your phone.</p>
+          <p class="footer-contact">support@petafinds.lk</p>
         </div>
-        <div class="footer-links">
-          <a href="../#home">Home</a>
-          <a href="../#customers">For Customers</a>
+        <nav class="footer-col" aria-label="Explore">
+          <h4>Explore</h4>
+          <a href="../#customers">For Shoppers</a>
           <a href="../#business">For Businesses</a>
           <a href="../#features">Features</a>
+          <a href="../#faq">FAQ</a>
+        </nav>
+        <nav class="footer-col" aria-label="More">
+          <h4>More</h4>
+          <a href="../">Home</a>
           <a href="#top">Back to top</a>
-        </div>
+          <a href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">App Store</a>
+        </nav>
       </div>
-      <p class="copyright">&copy; 2026 PetaFinds. All rights reserved.</p>
+      <div class="container footer-bottom">
+        <span>© 2026 PetaFinds. All rights reserved.</span>
+        <a class="btn btn-primary btn-sm" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download the app</a>
+      </div>
     </footer>
   </body>
 </html>
