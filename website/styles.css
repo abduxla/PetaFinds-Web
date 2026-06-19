@@ -1230,3 +1230,41 @@ img { max-width: 100%; display: block; }
   .btn:hover::after { animation: none !important; }
   .js .reveal { filter: none !important; transform: translateY(16px) !important; }
 }
+
+/* =====================================================================
+   MORE INTERACTIVE: live savings chart, analytics range toggle,
+   typing hero search.
+   ===================================================================== */
+/* Wholesale live savings bar chart (fills the card top, reacts to slider) */
+.ws-viz {
+  position: relative;
+  height: 156px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 30px;
+  padding: 14px 16px 14px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(13, 110, 110, 0.07), transparent);
+  overflow: hidden;
+}
+.ws-bar { width: 66px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 8px; }
+.ws-bar span { display: block; width: 100%; border-radius: 10px 10px 0 0; transition: height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ws-bar.retail span { height: 100%; background: var(--teal-light); }
+.ws-bar.wholesale span { background: linear-gradient(180deg, #13807e, var(--teal)); }
+.ws-bar small { color: var(--muted); font-size: 0.72rem; font-weight: 700; }
+.ws-disc { position: absolute; top: 12px; right: 14px; background: var(--orange); color: #fff; font-family: "Nunito", sans-serif; font-weight: 900; font-size: 0.92rem; padding: 5px 12px; border-radius: 999px; box-shadow: 0 8px 20px rgba(232, 130, 26, 0.4); transition: transform 0.2s ease; }
+
+/* Analytics 7d / 30d toggle */
+.an-range { display: inline-flex; gap: 3px; background: var(--section); border-radius: 999px; padding: 3px; margin: 2px 0 14px; }
+.an-range button { border: 0; background: transparent; color: var(--muted); font-family: "Nunito", sans-serif; font-weight: 800; font-size: 0.72rem; padding: 6px 13px; border-radius: 999px; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
+.an-range button.active { background: var(--teal); color: #fff; }
+
+/* Typing search caret in hero phone */
+.tw-caret { display: inline-block; width: 2px; height: 0.95em; background: currentColor; margin-left: 2px; vertical-align: -1px; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tw-caret { animation: none !important; }
+}

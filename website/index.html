@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="./styles.css?v=11" />
+    <link rel="stylesheet" href="./styles.css?v=12" />
   </head>
   <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="ph-search">
                   <svg viewBox="0 0 24 24" class="ph-search-ic"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-                  Search businesses &amp; products
+                  <span id="phType">Search businesses &amp; products</span>
                 </div>
                 <div class="ph-feature">
                   <small>New arrivals</small>
@@ -211,7 +211,11 @@
             </ul>
           </div>
           <div class="ws-card" id="bulkCalc" aria-label="Bulk savings calculator">
-            <div class="ws-img"></div>
+            <div class="ws-viz" aria-hidden="true">
+              <div class="ws-disc" id="wsDisc">−35%</div>
+              <div class="ws-bar retail"><span></span><small>Retail</small></div>
+              <div class="ws-bar wholesale"><span id="wsBar" style="height: 65%"></span><small>You pay</small></div>
+            </div>
             <div class="ws-name">Cotton T-Shirts — Bulk Pack</div>
             <div class="bulk-readout">
               <div><span>Order quantity</span><b id="bulkQty">50</b><small>units</small></div>
@@ -247,17 +251,21 @@
           <!-- Analytics dashboard mockup (illustrative) -->
           <div class="an-card" aria-hidden="true">
             <div class="an-head">
-              <div><span class="an-eyebrow">Your shop · this month</span><b>Performance</b></div>
+              <div><span class="an-eyebrow">Your shop</span><b>Performance</b></div>
               <span class="an-badge">Prime</span>
+            </div>
+            <div class="an-range" data-range-toggle>
+              <button type="button" data-range="d7">7 days</button>
+              <button type="button" data-range="d30" class="active">30 days</button>
             </div>
             <div class="an-total">
               <span>Total customer engagements</span>
-              <b data-count="1284">1,284</b>
+              <b data-count="1284" data-d7="300" data-d30="1284">1,284</b>
             </div>
             <div class="an-tiles">
-              <div class="an-tile"><span class="an-ic v"></span><b data-count="412">412</b><small>Shop views</small></div>
-              <div class="an-tile"><span class="an-ic p"></span><b data-count="760">760</b><small>Product views</small></div>
-              <div class="an-tile"><span class="an-ic c"></span><b data-count="112">112</b><small>Chats</small></div>
+              <div class="an-tile"><span class="an-ic v"></span><b data-count="412" data-d7="96" data-d30="412">412</b><small>Shop views</small></div>
+              <div class="an-tile"><span class="an-ic p"></span><b data-count="760" data-d7="178" data-d30="760">760</b><small>Product views</small></div>
+              <div class="an-tile"><span class="an-ic c"></span><b data-count="112" data-d7="26" data-d30="112">112</b><small>Chats</small></div>
             </div>
             <div class="an-toph">Top products <span>by views</span></div>
             <div class="an-list">
@@ -399,6 +407,6 @@
 
     <a class="mobile-bar" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download PetaFinds — free</a>
 
-    <script src="./app.js?v=4" defer></script>
+    <script src="./app.js?v=5" defer></script>
   </body>
 </html>

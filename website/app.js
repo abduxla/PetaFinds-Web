@@ -184,6 +184,13 @@
         uEl.classList.remove("pulse"); void uEl.offsetWidth; uEl.classList.add("pulse");
       }
       if (sEl) sEl.textContent = "LKR " + fmt(save);
+      var barEl = document.getElementById("wsBar");
+      if (barEl) barEl.style.height = unit / RETAIL * 100 + "%";
+      var discEl = document.getElementById("wsDisc");
+      if (discEl) {
+        var d = Math.round((1 - unit / RETAIL) * 100);
+        discEl.textContent = d > 0 ? "−" + d + "%" : "Retail";
+      }
       slider.style.setProperty("--fill", (q - slider.min) / (slider.max - slider.min) * 100 + "%");
     };
     slider.addEventListener("input", upd);
@@ -231,5 +238,58 @@
       });
       card.addEventListener("mouseleave", function () { card.style.transform = ""; });
     });
+
+    // Magnetic buttons
+    var clamp = function (v) { return Math.max(-9, Math.min(9, v)); };
+    document.querySelectorAll(".btn").forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var r = btn.getBoundingClientRect();
+        btn.style.transform =
+          "translate(" + clamp((e.clientX - (r.left + r.width / 2)) * 0.25) + "px," +
+          clamp((e.clientY - (r.top + r.height / 2)) * 0.35) + "px)";
+      });
+      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+    });
+  }
+
+  /* ---------- Analytics 7d / 30d toggle ---------- */
+  function tweenTo(el, target) {
+    if (reduce) { el.textContent = fmt(target); return; }
+    var start = parseFloat((el.textContent || "0").replace(/[^0-9.]/g, "")) || 0;
+    var t0 = performance.now(), dur = 700;
+    (function tick(now) {
+      var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(start + (target - start) * e));
+      if (p < 1) requestAnimationFrame(tick);
+    })(performance.now());
+  }
+  var rangeT = document.querySelector("[data-range-toggle]");
+  if (rangeT) {
+    rangeT.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-range]");
+      if (!b) return;
+      var key = b.getAttribute("data-range");
+      rangeT.querySelectorAll("[data-range]").forEach(function (x) { x.classList.toggle("active", x === b); });
+      document.querySelectorAll("[data-" + key + "]").forEach(function (el) {
+        tweenTo(el, parseFloat(el.getAttribute("data-" + key)) || 0);
+      });
+    });
+  }
+
+  /* ---------- Typing search in the hero phone ---------- */
+  var tw = document.getElementById("phType");
+  if (tw && !reduce) {
+    var words = ["iphone charger", "gold necklace", "cotton fabric", "school shoes", "phone cases", "spices wholesale"];
+    var wi = 0, ci = 0, del = false;
+    var caret = document.createElement("span");
+    caret.className = "tw-caret";
+    (function type() {
+      var w = words[wi];
+      tw.textContent = w.substring(0, ci);
+      tw.appendChild(caret);
+      if (!del) { ci++; if (ci > w.length) { del = true; return void setTimeout(type, 1500); } }
+      else { ci--; if (ci < 0) { del = false; wi = (wi + 1) % words.length; ci = 0; } }
+      setTimeout(type, del ? 45 : 85);
+    })();
   }
 })();
