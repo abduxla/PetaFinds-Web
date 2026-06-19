@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="./styles.css?v=8" />
+    <link rel="stylesheet" href="./styles.css?v=9" />
   </head>
   <body>
     <!-- ===================== HEADER ===================== -->
@@ -35,7 +35,8 @@
         </a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#shoppers">For Shoppers</a>
-          <a href="#analytics">Analytics</a>
+          <a href="#wholesale">Wholesale</a>
+          <a href="#map">Map</a>
           <a href="#business">For Businesses</a>
           <a href="/business/">Plans</a>
         </nav>
@@ -147,6 +148,62 @@
               <h3>Sellers you can trust</h3>
               <p>Verified business info, products, and ratings up front.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== MAP DISCOVERY (dark) ===================== -->
+      <section class="spotlight" id="map">
+        <div class="container spotlight-grid">
+          <div class="spotlight-copy">
+            <span class="eyebrow light">Map discovery</span>
+            <h2>The whole of Pettah, on one&nbsp;map.</h2>
+            <p>
+              Browse shops by location, see the exact street a seller is on, and get directions straight to
+              their door — no more wandering block to block in the heat.
+            </p>
+            <ul class="spotlight-list">
+              <li>Every shop pinned on a live map</li>
+              <li>The exact street for each seller</li>
+              <li>One-tap directions</li>
+              <li>Browse by area &amp; category</li>
+            </ul>
+            <a class="btn btn-light" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Explore the map →</a>
+          </div>
+          <div class="map-mock" aria-hidden="true">
+            <span class="map-road r1"></span>
+            <span class="map-road r2"></span>
+            <span class="map-pin p1"></span>
+            <span class="map-pin alt p2"></span>
+            <span class="map-pin p3"></span>
+            <div class="map-chip"><b>Mobile Centre</b><span>3rd Cross Street · Electronics</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== WHOLESALE (dark split) ===================== -->
+      <section class="section" id="wholesale">
+        <div class="container split">
+          <div class="split-copy">
+            <span class="eyebrow">Built for wholesale</span>
+            <h2>Wholesale prices,&nbsp;upfront.</h2>
+            <p>
+              Pettah runs on bulk. PetaFinds shows retail and wholesale pricing side by side, with the
+              minimum order quantity — so buyers see the real bulk deal before they even message the seller.
+            </p>
+            <ul class="spotlight-list">
+              <li>Retail &amp; wholesale, side by side</li>
+              <li>Minimum order quantity shown</li>
+              <li>Compare bulk deals across shops</li>
+              <li>Made for Colombo&nbsp;11 traders</li>
+            </ul>
+          </div>
+          <div class="ws-card" aria-hidden="true">
+            <div class="ws-img"></div>
+            <div class="ws-name">Cotton T-Shirts — Bulk Pack</div>
+            <div class="ws-row"><span>Retail price</span><em>LKR 950 / unit</em></div>
+            <div class="ws-row hot"><span>Wholesale price</span><em>LKR 620 / unit</em></div>
+            <div class="ws-moq">Minimum order · 50 units</div>
           </div>
         </div>
       </section>
@@ -326,6 +383,6 @@
 
     <a class="mobile-bar" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download PetaFinds — free</a>
 
-    <script src="./app.js?v=1" defer></script>
+    <script src="./app.js?v=2" defer></script>
   </body>
 </html>

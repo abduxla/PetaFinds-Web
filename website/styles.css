@@ -30,7 +30,8 @@
 /* Mockups stay bright screenshots that pop on the dark theme — re-scope the
    surface/text tokens to their light values inside the mockups only. */
 .phone,
-.an-card {
+.an-card,
+.ws-card {
   --bg: #fafaf8;
   --section: #f2f2ef;
   --white: #ffffff;
@@ -1021,4 +1022,77 @@ img { max-width: 100%; display: block; }
   .js .hx-copy > *, .js .hx-visual { animation: none !important; }
   .hx-visual .phone { animation: none !important; }
   .plan-price b.pulse { animation: none !important; }
+}
+
+/* =====================================================================
+   MAP DISCOVERY + WHOLESALE feature sections
+   ===================================================================== */
+/* Generic split (text + visual) for the wholesale section */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.split h2 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); font-weight: 900; margin-top: 12px; }
+.split p { color: var(--text); margin-top: 14px; font-size: 1.04rem; line-height: 1.6; }
+.split-copy { max-width: 520px; }
+
+/* ---- Map mockup (dark, stylised Pettah map) ---- */
+.map-mock {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  background: #0b1a18;
+}
+.map-mock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, rgba(45, 212, 191, 0.09) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(90deg, rgba(45, 212, 191, 0.09) 0 1px, transparent 1px 46px),
+    radial-gradient(120% 80% at 70% 25%, rgba(13, 110, 110, 0.4), transparent 60%);
+}
+.map-road { position: absolute; background: rgba(45, 212, 191, 0.18); border-radius: 999px; }
+.map-road.r1 { left: -8%; right: -8%; top: 44%; height: 7px; transform: rotate(-8deg); }
+.map-road.r2 { top: -8%; bottom: -8%; left: 40%; width: 7px; transform: rotate(7deg); }
+.map-pin {
+  position: absolute;
+  width: 18px; height: 18px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: var(--teal);
+  box-shadow: 0 0 0 4px rgba(13, 110, 110, 0.28), 0 6px 14px rgba(0, 0, 0, 0.55);
+}
+.map-pin.alt { background: var(--orange); box-shadow: 0 0 0 4px rgba(232, 130, 26, 0.28), 0 6px 14px rgba(0, 0, 0, 0.55); }
+.map-pin.p1 { top: 28%; left: 26%; }
+.map-pin.p2 { top: 52%; left: 60%; }
+.map-pin.p3 { top: 66%; left: 33%; }
+.map-chip {
+  position: absolute; bottom: 16px; left: 16px; right: 16px;
+  background: #fff; color: #111110;
+  border-radius: 14px; padding: 12px 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+.map-chip b { display: block; font-family: "Nunito", sans-serif; font-size: 0.95rem; }
+.map-chip span { font-size: 0.8rem; color: #78786e; }
+
+/* ---- Wholesale price card (light mockup) ---- */
+.ws-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  max-width: 380px; width: 100%; margin-inline: auto;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+.ws-img { height: 150px; border-radius: 14px; margin-bottom: 16px; background: linear-gradient(135deg, #bfe3df, #0d6e6e); }
+.ws-card .ws-name { font-family: "Nunito", sans-serif; font-weight: 800; font-size: 1.1rem; }
+.ws-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-top: 1px solid var(--border); margin-top: 4px; }
+.ws-row span { color: var(--muted); font-size: 0.9rem; }
+.ws-row em { font-style: normal; font-weight: 700; color: var(--ink); }
+.ws-row.hot em { color: var(--teal); font-family: "Nunito", sans-serif; font-weight: 900; font-size: 1.2rem; }
+.ws-moq { display: inline-block; margin-top: 16px; background: var(--teal-light); color: var(--teal); font-weight: 800; font-size: 0.8rem; padding: 8px 14px; border-radius: 999px; }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
 }

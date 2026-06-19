@@ -42,7 +42,8 @@
     ".section-head", ".cards > .card", ".spotlight-copy", ".an-card",
     ".spotlight-list > li", ".teaser > .teaser-tier", ".pay-steps > .pay-step",
     ".how-col", ".plans > .plan", ".bank-box", ".form-card",
-    ".finalcta-inner", ".proofbar-row", ".portal-hero > .container"
+    ".finalcta-inner", ".proofbar-row", ".portal-hero > .container",
+    ".split-copy", ".map-mock", ".ws-card"
   ];
   var nodes = [];
   SELECTORS.forEach(function (sel) {
