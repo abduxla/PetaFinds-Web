@@ -1165,3 +1165,68 @@ img { max-width: 100%; display: block; }
   .map-pin::after { animation: none !important; }
   .map-chip.pop, .bulk-unit.pulse { animation: none !important; }
 }
+
+/* =====================================================================
+   AMPED MOTION LAYER — ambient + interactive motion everywhere.
+   All continuous/interactive motion is killed under reduced-motion.
+   ===================================================================== */
+/* Cinematic reveals (rise + scale + de-blur) */
+.js .reveal { transform: translateY(32px) scale(0.97); filter: blur(8px); transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.7s ease; }
+.js .reveal.in { transform: none; filter: blur(0); }
+
+/* Scroll progress bar */
+.scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--teal), var(--orange)); z-index: 200; box-shadow: 0 0 12px rgba(45, 212, 191, 0.5); transition: width 0.08s linear; }
+
+/* Dark sections: floating glow orbs + cursor glow + keep content above */
+.hx, .spotlight, .finalcta { position: relative; overflow: hidden; }
+.hx > .container, .spotlight > .container, .finalcta > .container { position: relative; z-index: 2; }
+.hx::after, .spotlight::after, .finalcta::after {
+  content: ""; position: absolute; width: 540px; height: 540px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.2), transparent 70%);
+  filter: blur(40px); pointer-events: none; z-index: 0;
+  animation: drift 16s ease-in-out infinite alternate;
+}
+.hx::after { top: -140px; right: -60px; }
+.spotlight::after { bottom: -160px; left: -90px; background: radial-gradient(circle, rgba(232, 130, 26, 0.18), transparent 70%); animation-duration: 20s; }
+.finalcta::after { top: -160px; left: 40%; animation-duration: 22s; }
+@keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(46px, 34px) scale(1.18); } }
+/* Hero cursor-follow glow */
+.hx::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(560px circle at var(--mx, 72%) var(--my, 18%), rgba(45, 212, 191, 0.16), transparent 60%); transition: background 0.2s ease; }
+
+/* Proof bar → marquee */
+.proofbar .marquee { overflow: hidden; }
+.proofbar .marquee-track { display: inline-flex; align-items: center; gap: 14px; width: max-content; padding: 15px 0; white-space: nowrap; animation: marquee 32s linear infinite; }
+.proofbar .marquee-track span:not(.dotsep) { font-size: 0.88rem; font-weight: 600; color: rgba(255, 255, 255, 0.82); }
+.proofbar .marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Button shine sweep */
+.btn { position: relative; overflow: hidden; }
+.btn::after { content: ""; position: absolute; top: 0; left: -130%; width: 55%; height: 100%; transform: skewX(-18deg); background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent); pointer-events: none; }
+.btn:hover::after { animation: shine 0.7s ease; }
+@keyframes shine { to { left: 140%; } }
+
+/* Card 3D tilt + cursor spotlight */
+.card, .plan, .an-card, .ws-card { position: relative; will-change: transform; transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease; }
+.card::after, .plan::after, .an-card::after, .ws-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(45, 212, 191, 0.14), transparent 60%);
+}
+.card:hover::after, .plan:hover::after, .an-card:hover::after, .ws-card:hover::after { opacity: 1; }
+
+/* Map: radar scan line + pin layering */
+.map-pin { z-index: 2; }
+.map-chip, .map-score, .map-hint { z-index: 4; }
+.map-mock .map-scan { position: absolute; left: 0; right: 0; top: 0; height: 38%; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(45, 212, 191, 0.16), transparent); animation: scan 4.5s ease-in-out infinite alternate; }
+@keyframes scan { from { transform: translateY(-20%); } to { transform: translateY(190%); } }
+
+/* Pulsing brand dot */
+.brand-mark i { animation: dotpulse 2.4s ease-in-out infinite; }
+@keyframes dotpulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.8); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hx::after, .spotlight::after, .finalcta::after,
+  .proofbar .marquee-track, .map-mock .map-scan, .brand-mark i { animation: none !important; }
+  .btn:hover::after { animation: none !important; }
+  .js .reveal { filter: none !important; transform: translateY(16px) !important; }
+}
