@@ -114,4 +114,79 @@
       });
     });
   }
+
+  /* ---------- Map "Discover Pettah" game ---------- */
+  var map = document.getElementById("mapGame");
+  if (map) {
+    var pins = map.querySelectorAll(".map-pin");
+    var chip = document.getElementById("mapChip");
+    var score = document.getElementById("mapScore");
+    var found = 0, total = pins.length;
+    if (score) score.textContent = "0 / " + total + " discovered";
+    pins.forEach(function (pin) {
+      pin.addEventListener("click", function () {
+        var d = {};
+        try { d = JSON.parse(pin.getAttribute("data-shop")); } catch (e) {}
+        pins.forEach(function (p) { p.classList.remove("active"); });
+        pin.classList.add("active");
+        if (chip) {
+          chip.innerHTML = "<b>" + (d.name || "Shop") + "</b><span>" + (d.meta || "") + "</span>";
+          chip.classList.remove("pop"); void chip.offsetWidth; chip.classList.add("pop");
+        }
+        if (!pin.classList.contains("found")) {
+          pin.classList.add("found");
+          found++;
+          if (score) score.textContent = found + " / " + total + " discovered";
+          if (found === total) {
+            if (score) score.textContent = "Pettah unlocked!";
+            if (chip) chip.innerHTML = "<b>You found every shop.</b><span>Now do it for real — get the app.</span>";
+            burst(map);
+          }
+        }
+      });
+    });
+  }
+
+  function burst(host) {
+    if (reduce) return;
+    var r = host.getBoundingClientRect();
+    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var colors = ["#0d6e6e", "#e8821a", "#2dd4bf", "#ffffff"];
+    for (var i = 0; i < 38; i++) {
+      var el = document.createElement("div");
+      el.className = "confetti-piece";
+      el.style.left = cx + "px";
+      el.style.top = cy + "px";
+      el.style.background = colors[i % colors.length];
+      var a = Math.random() * Math.PI * 2, dist = 70 + Math.random() * 180;
+      el.style.setProperty("--tx", Math.cos(a) * dist + "px");
+      el.style.setProperty("--ty", Math.sin(a) * dist - 60 + "px");
+      el.style.animationDelay = Math.random() * 0.12 + "s";
+      document.body.appendChild(el);
+      (function (n) { setTimeout(function () { n.remove(); }, 1700); })(el);
+    }
+  }
+
+  /* ---------- Wholesale bulk-savings slider ---------- */
+  var slider = document.getElementById("bulkSlider");
+  if (slider) {
+    var RETAIL = 950;
+    var tier = function (q) { return q >= 200 ? 540 : q >= 50 ? 620 : q >= 10 ? 780 : 950; };
+    var upd = function () {
+      var q = +slider.value, unit = tier(q), save = q * (RETAIL - unit);
+      var qEl = document.getElementById("bulkQty");
+      var uEl = document.getElementById("bulkUnit");
+      var sEl = document.getElementById("bulkSave");
+      if (qEl) qEl.textContent = q;
+      if (uEl) {
+        uEl.textContent = "LKR " + fmt(unit);
+        uEl.classList.toggle("hot", unit < RETAIL);
+        uEl.classList.remove("pulse"); void uEl.offsetWidth; uEl.classList.add("pulse");
+      }
+      if (sEl) sEl.textContent = "LKR " + fmt(save);
+      slider.style.setProperty("--fill", (q - slider.min) / (slider.max - slider.min) * 100 + "%");
+    };
+    slider.addEventListener("input", upd);
+    upd();
+  }
 })();

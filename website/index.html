@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="./styles.css?v=9" />
+    <link rel="stylesheet" href="./styles.css?v=10" />
   </head>
   <body>
     <!-- ===================== HEADER ===================== -->
@@ -170,13 +170,18 @@
             </ul>
             <a class="btn btn-light" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Explore the map →</a>
           </div>
-          <div class="map-mock" aria-hidden="true">
+          <div class="map-mock" id="mapGame" aria-label="Discover Pettah shops — tap the pins">
             <span class="map-road r1"></span>
             <span class="map-road r2"></span>
-            <span class="map-pin p1"></span>
-            <span class="map-pin alt p2"></span>
-            <span class="map-pin p3"></span>
-            <div class="map-chip"><b>Mobile Centre</b><span>3rd Cross Street · Electronics</span></div>
+            <span class="map-hint">Tap the pins</span>
+            <span class="map-score" id="mapScore">0 / 6 discovered</span>
+            <button type="button" class="map-pin p1" data-shop='{"name":"Mobile Centre","meta":"3rd Cross St · Electronics"}' aria-label="Mobile Centre"></button>
+            <button type="button" class="map-pin alt p2" data-shop='{"name":"Silk Route","meta":"Sea St · Textiles"}' aria-label="Silk Route"></button>
+            <button type="button" class="map-pin p3" data-shop='{"name":"Spice Bazaar","meta":"Main St · Groceries"}' aria-label="Spice Bazaar"></button>
+            <button type="button" class="map-pin alt p4" data-shop='{"name":"Gold Palace","meta":"Front St · Jewellery"}' aria-label="Gold Palace"></button>
+            <button type="button" class="map-pin p5" data-shop='{"name":"Tech Lanka","meta":"Keyzer St · Electronics"}' aria-label="Tech Lanka"></button>
+            <button type="button" class="map-pin p6" data-shop='{"name":"Hardware Hub","meta":"2nd Cross St · Tools"}' aria-label="Hardware Hub"></button>
+            <div class="map-chip" id="mapChip"><b>Tap a pin to explore</b><span>Discover shops across Pettah</span></div>
           </div>
         </div>
       </section>
@@ -198,12 +203,16 @@
               <li>Made for Colombo&nbsp;11 traders</li>
             </ul>
           </div>
-          <div class="ws-card" aria-hidden="true">
+          <div class="ws-card" id="bulkCalc" aria-label="Bulk savings calculator">
             <div class="ws-img"></div>
             <div class="ws-name">Cotton T-Shirts — Bulk Pack</div>
-            <div class="ws-row"><span>Retail price</span><em>LKR 950 / unit</em></div>
-            <div class="ws-row hot"><span>Wholesale price</span><em>LKR 620 / unit</em></div>
-            <div class="ws-moq">Minimum order · 50 units</div>
+            <div class="bulk-readout">
+              <div><span>Order quantity</span><b id="bulkQty">50</b><small>units</small></div>
+              <div style="text-align: right"><span>Price / unit</span><b id="bulkUnit" class="bulk-unit hot">LKR 620</b></div>
+            </div>
+            <input type="range" id="bulkSlider" class="bulk-slider" min="1" max="500" value="50" aria-label="Order quantity" />
+            <div class="bulk-save">You save <b id="bulkSave">LKR 16,500</b> vs retail</div>
+            <div class="ws-moq">Drag to see your bulk savings</div>
           </div>
         </div>
       </section>
@@ -383,6 +392,6 @@
 
     <a class="mobile-bar" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download PetaFinds — free</a>
 
-    <script src="./app.js?v=2" defer></script>
+    <script src="./app.js?v=3" defer></script>
   </body>
 </html>

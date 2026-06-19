@@ -1096,3 +1096,72 @@ img { max-width: 100%; display: block; }
 @media (max-width: 900px) {
   .split { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   INTERACTIVE: map "Discover Pettah" game + wholesale bulk slider
+   ===================================================================== */
+/* Pins are now buttons with a radar ping */
+.map-pin { border: 0; padding: 0; cursor: pointer; appearance: none; }
+.map-pin::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.5);
+}
+.map-pin.alt::after { box-shadow: 0 0 0 0 rgba(232, 130, 26, 0.5); }
+.map-pin.p2::after { animation-delay: 0.5s; }
+.map-pin.p3::after { animation-delay: 1s; }
+.map-pin.p4::after { animation-delay: 1.4s; }
+.map-pin.p5::after { animation-delay: 0.8s; }
+.map-pin.p6::after { animation-delay: 1.8s; }
+@keyframes ping {
+  0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(45, 212, 191, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+}
+.map-pin:hover { transform: rotate(-45deg) scale(1.2); }
+.map-pin.active { transform: rotate(-45deg) scale(1.32); z-index: 3; }
+.map-pin.found::after { animation: none; }
+.map-pin.found::before { content: ""; position: absolute; inset: 5px; background: #fff; border-radius: 50%; }
+.map-pin.p4 { top: 38%; left: 48%; }
+.map-pin.p5 { top: 22%; left: 68%; }
+.map-pin.p6 { top: 74%; left: 70%; }
+.map-score {
+  position: absolute; top: 14px; right: 14px; z-index: 4;
+  background: rgba(0, 0, 0, 0.45); color: #fff;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  padding: 7px 13px; border-radius: 999px;
+  font-family: "Nunito", sans-serif; font-weight: 800; font-size: 0.76rem;
+}
+.map-hint { position: absolute; top: 14px; left: 14px; z-index: 4; color: rgba(255, 255, 255, 0.85); font-size: 0.76rem; font-weight: 600; }
+.map-chip { transition: transform 0.3s ease; }
+.map-chip.pop { animation: chippop 0.32s ease; }
+@keyframes chippop { from { transform: translateY(8px); opacity: 0.35; } to { transform: none; opacity: 1; } }
+
+/* Confetti (on completing the map game) */
+.confetti-piece { position: fixed; width: 9px; height: 14px; border-radius: 2px; z-index: 9999; pointer-events: none; animation: confetti 1.4s ease-out forwards; }
+@keyframes confetti { to { transform: translate(var(--tx), var(--ty)) rotate(540deg); opacity: 0; } }
+
+/* Wholesale bulk-savings slider */
+.bulk-readout { display: flex; justify-content: space-between; gap: 16px; margin: 6px 0 16px; }
+.bulk-readout > div { display: flex; flex-direction: column; }
+.bulk-readout span { color: var(--muted); font-size: 0.76rem; font-weight: 600; }
+.bulk-readout b { font-family: "Nunito", sans-serif; font-size: 1.5rem; font-weight: 900; line-height: 1.1; margin-top: 2px; }
+.bulk-readout small { color: var(--muted); font-size: 0.7rem; }
+.bulk-unit.hot { color: var(--teal); }
+.bulk-unit.pulse { display: inline-block; animation: pricepulse 0.25s ease; }
+.bulk-slider {
+  width: 100%; -webkit-appearance: none; appearance: none;
+  height: 8px; border-radius: 999px; outline: none; cursor: pointer;
+  background: linear-gradient(90deg, var(--teal) var(--fill, 10%), var(--border) var(--fill, 10%));
+}
+.bulk-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--teal); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); cursor: pointer; }
+.bulk-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid var(--teal); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); cursor: pointer; }
+.bulk-save { margin-top: 16px; text-align: center; font-size: 0.95rem; color: var(--text); }
+.bulk-save b { color: var(--teal); font-family: "Nunito", sans-serif; font-weight: 900; font-size: 1.2rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pin::after { animation: none !important; }
+  .map-chip.pop, .bulk-unit.pulse { animation: none !important; }
+}
