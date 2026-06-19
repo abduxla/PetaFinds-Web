@@ -22,7 +22,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <script>document.documentElement.className += " js";</script>
+    <link rel="stylesheet" href="./styles.css?v=8" />
   </head>
   <body>
     <!-- ===================== HEADER ===================== -->
@@ -178,12 +179,12 @@
             </div>
             <div class="an-total">
               <span>Total customer engagements</span>
-              <b>1,284</b>
+              <b data-count="1284">1,284</b>
             </div>
             <div class="an-tiles">
-              <div class="an-tile"><span class="an-ic v"></span><b>412</b><small>Shop views</small></div>
-              <div class="an-tile"><span class="an-ic p"></span><b>760</b><small>Product views</small></div>
-              <div class="an-tile"><span class="an-ic c"></span><b>112</b><small>Chats</small></div>
+              <div class="an-tile"><span class="an-ic v"></span><b data-count="412">412</b><small>Shop views</small></div>
+              <div class="an-tile"><span class="an-ic p"></span><b data-count="760">760</b><small>Product views</small></div>
+              <div class="an-tile"><span class="an-ic c"></span><b data-count="112">112</b><small>Chats</small></div>
             </div>
             <div class="an-toph">Top products <span>by views</span></div>
             <div class="an-list">
@@ -325,13 +326,6 @@
 
     <a class="mobile-bar" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download PetaFinds — free</a>
 
-    <script>
-      (function () {
-        var header = document.querySelector(".header");
-        var onScroll = function () { if (header) header.classList.toggle("scrolled", window.scrollY > 8); };
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-      })();
-    </script>
+    <script src="./app.js?v=1" defer></script>
   </body>
 </html>

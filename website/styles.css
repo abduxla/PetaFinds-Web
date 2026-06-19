@@ -972,3 +972,53 @@ img { max-width: 100%; display: block; }
   .spotlight-list { grid-template-columns: 1fr 1fr; }
   .teaser { grid-template-columns: 1fr; }
 }
+
+/* =====================================================================
+   MOTION LAYER (app.js). Everything degrades to fully-visible when JS is
+   off or the user prefers reduced motion.
+   ===================================================================== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* Header hide-on-scroll */
+.header { transition: transform 0.35s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.header.hide { transform: translateY(-100%); }
+
+/* Hero staggered entrance on load */
+@keyframes heroIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.js .hx-copy > * { animation: heroIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.js .hx-copy > *:nth-child(2) { animation-delay: 0.07s; }
+.js .hx-copy > *:nth-child(3) { animation-delay: 0.14s; }
+.js .hx-copy > *:nth-child(4) { animation-delay: 0.21s; }
+.js .hx-copy > *:nth-child(5) { animation-delay: 0.28s; }
+.js .hx-visual { animation: heroIn 0.8s 0.18s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* Floating hero phone */
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.hx-visual .phone { animation: floaty 6s ease-in-out infinite; }
+
+/* Button polish on dark */
+.btn-primary:hover, .btn-accent:hover { filter: brightness(1.07); }
+.an-card { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.an-card:hover { transform: translateY(-6px); }
+
+/* Billing toggle */
+.billing-wrap { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 32px; }
+.billing { display: inline-flex; align-items: center; gap: 4px; background: var(--white); border: 1px solid var(--border); border-radius: 999px; padding: 5px; }
+.billing button { border: 0; background: transparent; color: var(--muted); font-family: "Nunito", sans-serif; font-weight: 800; font-size: 0.92rem; padding: 9px 20px; border-radius: 999px; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; }
+.billing button.active { background: var(--teal); color: #fff; }
+.billing-save { color: var(--teal); font-weight: 800; font-size: 0.82rem; }
+@keyframes pricepulse { from { opacity: 0.4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.plan-price b.pulse { display: inline-block; animation: pricepulse 0.3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .js .hx-copy > *, .js .hx-visual { animation: none !important; }
+  .hx-visual .phone { animation: none !important; }
+  .plan-price b.pulse { animation: none !important; }
+}

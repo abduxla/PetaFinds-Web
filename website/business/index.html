@@ -16,7 +16,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=7" />
+    <script>document.documentElement.className += " js";</script>
+    <link rel="stylesheet" href="../styles.css?v=8" />
   </head>
   <body>
     <!-- ===================== HEADER ===================== -->
@@ -57,13 +58,21 @@
             <p>Your shop is already on PetaFinds for free on the <strong>Listed</strong> level. Pick an upgrade below.</p>
           </div>
 
+          <div class="billing-wrap">
+            <div class="billing" data-billing-toggle>
+              <button type="button" data-billing="monthly" class="active">Monthly</button>
+              <button type="button" data-billing="annual">Annual</button>
+            </div>
+            <span class="billing-save">2 months free</span>
+          </div>
+
           <div class="plans">
             <!-- SPOTLIGHT -->
             <article class="plan">
               <div class="plan-top">
                 <h3>Spotlight</h3>
                 <p class="plan-tag">Stand out</p>
-                <div class="plan-price"><b>LKR 0,000</b><span>/ month</span></div>
+                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
                 <!-- TODO: replace LKR 0,000 with the real Spotlight price -->
               </div>
               <ul class="plan-perks">
@@ -81,7 +90,7 @@
               <div class="plan-top">
                 <h3>Prime</h3>
                 <p class="plan-tag">Get noticed everywhere</p>
-                <div class="plan-price"><b>LKR 0,000</b><span>/ month</span></div>
+                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
                 <!-- TODO: replace LKR 0,000 with the real Prime price -->
               </div>
               <ul class="plan-perks">
@@ -98,7 +107,7 @@
               <div class="plan-top">
                 <h3>Elite</h3>
                 <p class="plan-tag">Own your category</p>
-                <div class="plan-price"><b>LKR 0,000</b><span>/ month</span></div>
+                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
                 <!-- TODO: replace LKR 0,000 with the real Elite price -->
               </div>
               <ul class="plan-perks">
@@ -233,6 +242,7 @@
       </div>
     </footer>
 
+    <script src="../app.js?v=1" defer></script>
     <script>
       // Pre-select the plan in the form when a plan card is chosen, then scroll to it.
       document.querySelectorAll(".plan-pick").forEach(function (b) {
