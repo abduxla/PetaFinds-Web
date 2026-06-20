@@ -221,15 +221,20 @@
     // Global cursor-follow glow across every section.
     var glow = document.getElementById("cursorGlow");
     if (glow) {
-      var gx = 0, gy = 0, graf = null;
+      var tx = 0, ty = 0, cx = 0, cy = 0, started = false, running = false;
+      var loop = function () {
+        cx += (tx - cx) * 0.08;
+        cy += (ty - cy) * 0.08;
+        glow.style.transform = "translate(" + (cx - 350) + "px," + (cy - 350) + "px)";
+        if (Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) {
+          requestAnimationFrame(loop);
+        } else { running = false; }
+      };
       window.addEventListener("mousemove", function (e) {
-        gx = e.clientX; gy = e.clientY;
-        if (glow.style.opacity !== "1") glow.style.opacity = "1";
-        if (graf) return;
-        graf = requestAnimationFrame(function () {
-          graf = null;
-          glow.style.transform = "translate(" + (gx - 260) + "px," + (gy - 260) + "px)";
-        });
+        tx = e.clientX; ty = e.clientY;
+        glow.style.opacity = "1";
+        if (!started) { started = true; cx = tx; cy = ty; }
+        if (!running) { running = true; requestAnimationFrame(loop); }
       });
       document.addEventListener("mouseleave", function () { glow.style.opacity = "0"; });
     }
