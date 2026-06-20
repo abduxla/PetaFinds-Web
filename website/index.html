@@ -23,7 +23,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="./styles.css?v=12" />
+    <link rel="stylesheet" href="./styles.css?v=13" />
   </head>
   <body>
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -212,18 +212,18 @@
           </div>
           <div class="ws-card" id="bulkCalc" aria-label="Bulk savings calculator">
             <div class="ws-viz" aria-hidden="true">
-              <div class="ws-disc" id="wsDisc">−35%</div>
+              <div class="ws-disc" id="wsDisc">−36%</div>
               <div class="ws-bar retail"><span></span><small>Retail</small></div>
-              <div class="ws-bar wholesale"><span id="wsBar" style="height: 65%"></span><small>You pay</small></div>
+              <div class="ws-bar wholesale"><span id="wsBar" style="height: 64%"></span><small>You pay</small></div>
             </div>
             <div class="ws-name">Cotton T-Shirts — Bulk Pack</div>
             <div class="bulk-readout">
-              <div><span>Order quantity</span><b id="bulkQty">50</b><small>units</small></div>
-              <div style="text-align: right"><span>Price / unit</span><b id="bulkUnit" class="bulk-unit hot">LKR 620</b></div>
+              <div><span>Order quantity</span><b id="bulkQty">150</b><small>units</small></div>
+              <div style="text-align: right"><span>Price / unit</span><b id="bulkUnit" class="bulk-unit hot">LKR 611</b></div>
             </div>
-            <input type="range" id="bulkSlider" class="bulk-slider" min="1" max="500" value="50" aria-label="Order quantity" />
-            <div class="bulk-save">You save <b id="bulkSave">LKR 16,500</b> vs retail</div>
-            <div class="ws-moq">Drag to see your bulk savings</div>
+            <input type="range" id="bulkSlider" class="bulk-slider" min="1" max="500" value="150" aria-label="Order quantity" />
+            <div class="bulk-save">You save <b id="bulkSave">LKR 50,850</b> vs retail</div>
+            <div class="ws-moq" id="bulkMsg">Okay, big spender.</div>
           </div>
         </div>
       </section>
@@ -407,6 +407,6 @@
 
     <a class="mobile-bar" href="https://apps.apple.com/us/app/petafinds/id6774913835" target="_blank" rel="noopener">Download PetaFinds — free</a>
 
-    <script src="./app.js?v=5" defer></script>
+    <script src="./app.js?v=6" defer></script>
   </body>
 </html>

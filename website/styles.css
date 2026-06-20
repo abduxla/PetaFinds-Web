@@ -1250,8 +1250,8 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 .ws-bar { width: 66px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 8px; }
-.ws-bar span { display: block; width: 100%; border-radius: 10px 10px 0 0; transition: height 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.ws-bar.retail span { height: 100%; background: var(--teal-light); }
+.ws-bar span { display: block; width: 100%; border-radius: 10px 10px 0 0; transition: height 0.16s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ws-bar.retail span { height: 100%; background: #c4ddd8; border: 1px solid rgba(13, 110, 110, 0.3); }
 .ws-bar.wholesale span { background: linear-gradient(180deg, #13807e, var(--teal)); }
 .ws-bar small { color: var(--muted); font-size: 0.72rem; font-weight: 700; }
 .ws-disc { position: absolute; top: 12px; right: 14px; background: var(--orange); color: #fff; font-family: "Nunito", sans-serif; font-weight: 900; font-size: 0.92rem; padding: 5px 12px; border-radius: 999px; box-shadow: 0 8px 20px rgba(232, 130, 26, 0.4); transition: transform 0.2s ease; }

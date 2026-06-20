@@ -170,27 +170,33 @@
   /* ---------- Wholesale bulk-savings slider ---------- */
   var slider = document.getElementById("bulkSlider");
   if (slider) {
-    var RETAIL = 950;
-    var tier = function (q) { return q >= 200 ? 540 : q >= 50 ? 620 : q >= 10 ? 780 : 950; };
+    var RETAIL = 950, MAXD = 0.5;
+    // Smooth, continuous bulk discount — grows with quantity toward a cap.
+    var discFor = function (q) { return MAXD * (1 - Math.exp(-q / 120)); };
+    var bulkMsg = function (q) {
+      if (q < 25) return "Drag to see your bulk savings";
+      if (q < 90) return "Now we're talking.";
+      if (q < 180) return "Okay, big spender.";
+      if (q < 300) return "Easy — leave some money for us.";
+      if (q < 430) return "Mate. That's enough now.";
+      return "Okay you win. Stop dragging.";
+    };
+    var set = function (id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
     var upd = function () {
-      var q = +slider.value, unit = tier(q), save = q * (RETAIL - unit);
-      var qEl = document.getElementById("bulkQty");
+      var q = +slider.value, d = discFor(q);
+      var unit = Math.round(RETAIL * (1 - d)), save = q * (RETAIL - unit), pct = Math.round(d * 100);
+      set("bulkQty", q);
+      set("bulkSave", "LKR " + fmt(save));
+      set("bulkMsg", bulkMsg(q));
       var uEl = document.getElementById("bulkUnit");
-      var sEl = document.getElementById("bulkSave");
-      if (qEl) qEl.textContent = q;
       if (uEl) {
         uEl.textContent = "LKR " + fmt(unit);
-        uEl.classList.toggle("hot", unit < RETAIL);
+        uEl.classList.add("hot");
         uEl.classList.remove("pulse"); void uEl.offsetWidth; uEl.classList.add("pulse");
       }
-      if (sEl) sEl.textContent = "LKR " + fmt(save);
       var barEl = document.getElementById("wsBar");
-      if (barEl) barEl.style.height = unit / RETAIL * 100 + "%";
-      var discEl = document.getElementById("wsDisc");
-      if (discEl) {
-        var d = Math.round((1 - unit / RETAIL) * 100);
-        discEl.textContent = d > 0 ? "−" + d + "%" : "Retail";
-      }
+      if (barEl) barEl.style.height = (1 - d) * 100 + "%";
+      set("wsDisc", pct > 0 ? "−" + pct + "%" : "Retail");
       slider.style.setProperty("--fill", (q - slider.min) / (slider.max - slider.min) * 100 + "%");
     };
     slider.addEventListener("input", upd);
