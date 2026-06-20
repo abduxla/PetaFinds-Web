@@ -17,9 +17,10 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="../styles.css?v=13" />
+    <link rel="stylesheet" href="../styles.css?v=14" />
   </head>
   <body>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
     <!-- ===================== HEADER ===================== -->
     <header class="header scrolled" id="top">
       <div class="container nav">
@@ -242,7 +243,7 @@
       </div>
     </footer>
 
-    <script src="../app.js?v=6" defer></script>
+    <script src="../app.js?v=7" defer></script>
     <script>
       // Pre-select the plan in the form when a plan card is chosen, then scroll to it.
       document.querySelectorAll(".plan-pick").forEach(function (b) {

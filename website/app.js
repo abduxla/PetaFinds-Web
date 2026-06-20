@@ -218,13 +218,20 @@
   /* ---------- Pointer ambience (hover + fine pointer only) ---------- */
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (fine && !reduce) {
-    var hero = document.querySelector(".hx");
-    if (hero) {
-      hero.addEventListener("mousemove", function (e) {
-        var r = hero.getBoundingClientRect();
-        hero.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
-        hero.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+    // Global cursor-follow glow across every section.
+    var glow = document.getElementById("cursorGlow");
+    if (glow) {
+      var gx = 0, gy = 0, graf = null;
+      window.addEventListener("mousemove", function (e) {
+        gx = e.clientX; gy = e.clientY;
+        if (glow.style.opacity !== "1") glow.style.opacity = "1";
+        if (graf) return;
+        graf = requestAnimationFrame(function () {
+          graf = null;
+          glow.style.transform = "translate(" + (gx - 260) + "px," + (gy - 260) + "px)";
+        });
       });
+      document.addEventListener("mouseleave", function () { glow.style.opacity = "0"; });
     }
     document.querySelectorAll(".card, .plan, .an-card").forEach(function (card) {
       var raf = null;
