@@ -1,27 +1,57 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { doc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 import { useBusiness } from "@/lib/business-context";
+import { useDoc } from "@/lib/firestore-hooks";
 import {
-  effectiveTier,
+  requestUpgrade,
+  upgradeRequestFromDoc,
+} from "@/lib/upgrades";
+import { callableError } from "@/lib/callables";
+import {
+  membershipState,
   TIER_ORDER,
   TIER_PLANS,
+  type TierId,
 } from "@/config/tiers";
-import { daysUntil, formatDate, formatLkr } from "@/lib/format";
+import { formatDate, formatLkr } from "@/lib/format";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge, TierBadge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { cn } from "@/lib/cn";
-
-/** WhatsApp upgrade line — replaced by the in-portal upgrade request flow
- *  (upgradeRequests collection) in the payments module. */
-const SUPPORT_WHATSAPP = "94777128291";
 
 export default function MembershipPage() {
   const { business } = useBusiness();
+  const { data: openRequest } = useDoc(
+    business ? doc(db, "upgradeRequests", business.id) : null,
+    upgradeRequestFromDoc,
+  );
+  const [confirmTier, setConfirmTier] = useState<TierId | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   if (!business) return null;
 
-  const effective = effectiveTier(business.tier, business.tierValidUntil);
-  const days = daysUntil(business.tierValidUntil);
+  const ms = membershipState(business.tier, business.tierValidUntil);
+  const pending = openRequest?.status === "pending";
+
+  async function submitRequest() {
+    if (!confirmTier) return;
+    setBusy(true);
+    setError(null);
+    try {
+      await requestUpgrade(confirmTier);
+      setConfirmTier(null);
+    } catch (err) {
+      setError(callableError(err));
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -38,41 +68,78 @@ export default function MembershipPage() {
       <Card>
         <CardBody className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <TierBadge tier={effective} />
+            <TierBadge tier={ms.effective} />
             <div>
               <p className="font-display text-lg font-black text-ink-900">
-                {TIER_PLANS[effective].name}
+                {TIER_PLANS[ms.effective].name}
               </p>
               <p className="text-[13px] text-ink-500">
-                {TIER_PLANS[effective].tagline}
+                {TIER_PLANS[ms.effective].tagline}
               </p>
             </div>
           </div>
           <div className="text-right text-[13px] text-ink-500">
-            {effective === "listed" ? (
-              <p>Free plan — no expiry</p>
-            ) : (
-              <>
-                <p>
-                  Renews {formatDate(business.tierValidUntil)}
-                  {days !== null && (
-                    <span className="font-semibold text-ink-700">
-                      {" "}
-                      · {days} day{days === 1 ? "" : "s"} left
-                    </span>
-                  )}
-                </p>
-              </>
+            {ms.phase === "free" && <p>Free plan — no expiry</p>}
+            {ms.phase === "active" && (
+              <p>
+                Renews {formatDate(business.tierValidUntil)}
+                <span className="font-semibold text-ink-700">
+                  {" "}
+                  · {ms.daysLeft} day{ms.daysLeft === 1 ? "" : "s"} left
+                </span>
+              </p>
+            )}
+            {ms.phase === "grace" && (
+              <p className="font-semibold text-danger">
+                Expired — {ms.daysLeft} day{ms.daysLeft === 1 ? "" : "s"} left
+                to renew your {TIER_PLANS[ms.assigned].name} plan
+              </p>
             )}
           </div>
         </CardBody>
       </Card>
 
+      {/* Open upgrade request status */}
+      {openRequest && (
+        <Card
+          className={cn(
+            openRequest.status === "pending" && "border-orange/40",
+            openRequest.status === "approved" && "border-success/40",
+          )}
+        >
+          <CardBody className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm font-bold text-ink-900">
+                Upgrade to {TIER_PLANS[openRequest.targetTier].name}
+                {openRequest.status === "pending" && " — pending approval"}
+                {openRequest.status === "approved" && " — approved 🎉"}
+                {openRequest.status === "declined" && " — declined"}
+              </p>
+              <p className="mt-0.5 text-[13px] text-ink-500">
+                Requested {formatDate(openRequest.createdAt)}
+                {openRequest.decisionNote && <> · {openRequest.decisionNote}</>}
+              </p>
+            </div>
+            {openRequest.status === "pending" && (
+              <Badge tone="orange">Pending Approval</Badge>
+            )}
+            {openRequest.status === "approved" && (
+              <Link href="/payments">
+                <Button size="sm">Submit payment to activate</Button>
+              </Link>
+            )}
+            {openRequest.status === "declined" && (
+              <Badge tone="danger">Declined</Badge>
+            )}
+          </CardBody>
+        </Card>
+      )}
+
       {/* Comparison grid */}
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {TIER_ORDER.map((id) => {
           const plan = TIER_PLANS[id];
-          const isCurrent = id === effective;
+          const isCurrent = id === ms.effective;
           return (
             <Card
               key={id}
@@ -145,20 +212,21 @@ export default function MembershipPage() {
                   <Button variant="secondary" disabled className="w-full">
                     Your current plan
                   </Button>
+                ) : plan.priceLkr === 0 ? (
+                  <Button variant="secondary" disabled className="w-full">
+                    Included with every plan
+                  </Button>
                 ) : (
-                  <a
-                    href={`https://wa.me/${SUPPORT_WHATSAPP}?text=${encodeURIComponent(
-                      `Hi PetaFinds! I'd like to upgrade "${business.businessName}" to the ${plan.name} plan.`,
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
+                  <Button
+                    className="w-full"
+                    disabled={pending}
+                    onClick={() => {
+                      setError(null);
+                      setConfirmTier(id);
+                    }}
                   >
-                    <Button className="w-full">
-                      {plan.priceLkr === 0 ? "Downgrade" : "Upgrade"} — talk to
-                      us
-                    </Button>
-                  </a>
+                    {pending ? "Request pending…" : `Request ${plan.name}`}
+                  </Button>
                 )}
               </CardBody>
             </Card>
@@ -166,11 +234,39 @@ export default function MembershipPage() {
         })}
       </div>
 
+      {error && (
+        <p className="text-center text-[13px] font-semibold text-danger">
+          {error}
+        </p>
+      )}
       <p className="text-center text-xs text-ink-500">
-        Prices in Sri Lankan Rupees. Plan changes are activated by the
-        PetaFinds team once payment is confirmed — in-portal payment
-        submission is coming to this page soon.
+        Prices in Sri Lankan Rupees. After your request is approved, submit
+        the payment on the Payments page — your new plan activates as soon
+        as it&apos;s verified.
       </p>
+
+      <ConfirmDialog
+        open={confirmTier !== null}
+        title={
+          confirmTier ? `Request the ${TIER_PLANS[confirmTier].name} plan?` : ""
+        }
+        body={
+          confirmTier ? (
+            <>
+              The PetaFinds team reviews upgrade requests, usually within one
+              business day. Once approved you&apos;ll pay{" "}
+              <strong>
+                {formatLkr(TIER_PLANS[confirmTier].priceLkr)}/month
+              </strong>{" "}
+              via the Payments page to activate it.
+            </>
+          ) : null
+        }
+        confirmLabel="Send request"
+        busy={busy}
+        onConfirm={() => void submitRequest()}
+        onCancel={() => setConfirmTier(null)}
+      />
     </div>
   );
 }

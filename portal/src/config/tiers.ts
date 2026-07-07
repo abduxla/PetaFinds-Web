@@ -125,3 +125,60 @@ export function effectiveTier(
 export function planOf(id?: string | null): TierPlan {
   return TIER_PLANS[tierFromId(id)];
 }
+
+/** Days after expiry during which the plan can be renewed without losing
+ *  the assigned tier (mirrors GRACE_DAYS in functions/index.js — the
+ *  dailyMembershipSweep hard-downgrades once this window closes). */
+export const GRACE_DAYS = 7;
+
+export type MembershipPhase = "free" | "active" | "grace" | "expired";
+
+export interface MembershipState {
+  /** Benefits tier right now (grace does NOT extend benefits). */
+  effective: TierId;
+  /** The tier still assigned on the doc (kept through grace). */
+  assigned: TierId;
+  phase: MembershipPhase;
+  /** active: days to expiry · grace: days left to renew · else null. */
+  daysLeft: number | null;
+}
+
+/** Full renewal picture for banners/CTAs — richer than effectiveTier. */
+export function membershipState(
+  tier: TierId,
+  tierValidUntil: Date | null,
+): MembershipState {
+  if (tier === "listed" || !tierValidUntil) {
+    return {
+      effective: "listed",
+      assigned: tier,
+      phase: "free",
+      daysLeft: null,
+    };
+  }
+  const now = Date.now();
+  const expiry = tierValidUntil.getTime();
+  const graceEnd = expiry + GRACE_DAYS * 86_400_000;
+  if (now <= expiry) {
+    return {
+      effective: tier,
+      assigned: tier,
+      phase: "active",
+      daysLeft: Math.ceil((expiry - now) / 86_400_000),
+    };
+  }
+  if (now <= graceEnd) {
+    return {
+      effective: "listed",
+      assigned: tier,
+      phase: "grace",
+      daysLeft: Math.ceil((graceEnd - now) / 86_400_000),
+    };
+  }
+  return {
+    effective: "listed",
+    assigned: tier,
+    phase: "expired",
+    daysLeft: null,
+  };
+}

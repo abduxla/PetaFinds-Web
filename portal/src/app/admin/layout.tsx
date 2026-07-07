@@ -9,6 +9,7 @@ import {
   IconBuildings,
   IconGauge,
   IconInvoice,
+  IconMembership,
   IconPayments,
 } from "@/components/shell/icons";
 
@@ -17,6 +18,7 @@ const NAV: NavItem[] = [
   { href: "/admin/businesses", label: "Businesses", icon: IconBuildings },
   { href: "/admin/payments", label: "Payments", icon: IconPayments },
   { href: "/admin/invoices", label: "Invoices", icon: IconInvoice },
+  { href: "/admin/upgrades", label: "Upgrades", icon: IconMembership },
 ];
 
 /**

@@ -13,14 +13,23 @@
   NODE_VERSION = "22"
 
 # Security headers for the portal (the marketing site stays as-is).
+#
+# The CSP is a strict allowlist of exactly the services the portal talks
+# to (Firebase Auth/Firestore/Storage/Functions/App Check + reCAPTCHA).
+# Anything else — injected scripts, exfiltration endpoints, embedded
+# frames — is refused by the browser. 'unsafe-inline' for scripts is
+# required by Next.js static-export bootstrap; external script sources
+# remain restricted to self + Google's reCAPTCHA hosts.
 [[headers]]
   for = "/portal/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https://firebasestorage.googleapis.com https://www.gstatic.com; connect-src 'self' https://*.googleapis.com https://firebasestorage.googleapis.com https://us-central1-pettahfinds-75075.cloudfunctions.net https://www.google.com; frame-src https://www.google.com https://pettahfinds-75075.firebaseapp.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
 # Hashed Next.js assets are immutable — cache them hard.
 [[headers]]

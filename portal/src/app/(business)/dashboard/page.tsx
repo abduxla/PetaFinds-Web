@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { useAuth } from "@/lib/auth-context";
 import { useBusiness } from "@/lib/business-context";
-import { effectiveTier, planOf, TIER_PLANS } from "@/config/tiers";
+import {
+  effectiveTier,
+  membershipState,
+  planOf,
+  TIER_PLANS,
+} from "@/config/tiers";
 import { daysUntil, formatDate, formatDateTime, formatLkr } from "@/lib/format";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Badge, StatusBadge, TierBadge } from "@/components/ui/badge";
@@ -17,10 +22,12 @@ export default function DashboardPage() {
   const assignedPlan = planOf(business.tier);
   const effective = effectiveTier(business.tier, business.tierValidUntil);
   const effectivePlan = TIER_PLANS[effective];
-  const expired = assignedPlan.id !== "listed" && effective === "listed";
+  const ms = membershipState(business.tier, business.tierValidUntil);
   const days = daysUntil(business.tierValidUntil);
-  const expiringSoon =
-    !expired && effective !== "listed" && days !== null && days <= 30;
+  // Mirror the backend: one warning window, 7 days before expiry.
+  const expiringSoon = ms.phase === "active" && ms.daysLeft !== null &&
+    ms.daysLeft <= 7;
+  const expired = ms.phase === "expired";
 
   const lastLogin = fbUser?.metadata.lastSignInTime
     ? formatDateTime(new Date(fbUser.metadata.lastSignInTime))
@@ -60,11 +67,21 @@ export default function DashboardPage() {
           once your listing goes live — typically within 24–48 hours.
         </Banner>
       )}
+      {ms.phase === "grace" && (
+        <Banner
+          tone="danger"
+          title={`Your ${TIER_PLANS[ms.assigned].name} membership has expired — ${ms.daysLeft} day${ms.daysLeft === 1 ? "" : "s"} left to renew`}
+        >
+          Your benefits ended on {formatDate(business.tierValidUntil)}. Renew
+          within the grace period to restore your plan; after that your
+          account moves to the free Silver plan.
+        </Banner>
+      )}
       {expired && (
-        <Banner tone="danger" title="Your membership has expired">
+        <Banner tone="danger" title="Your membership has ended">
           Your {assignedPlan.name} benefits ended on{" "}
           {formatDate(business.tierValidUntil)} and your listing has moved to
-          the free Silver plan. Renew to restore your benefits.
+          the free Silver plan. Upgrade anytime to restore your benefits.
         </Banner>
       )}
       {expiringSoon && (
