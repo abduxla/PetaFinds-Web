@@ -8,6 +8,7 @@ import { FullScreenSpinner } from "@/components/ui/spinner";
 import { PortalShell, type NavItem } from "@/components/shell/portal-shell";
 import {
   IconHome,
+  IconInvoice,
   IconMembership,
   IconPayments,
 } from "@/components/shell/icons";
@@ -19,6 +20,7 @@ const NAV: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: IconHome },
   { href: "/membership", label: "Membership", icon: IconMembership },
   { href: "/payments", label: "Payments", icon: IconPayments },
+  { href: "/invoices", label: "Invoices", icon: IconInvoice },
 ];
 
 /**

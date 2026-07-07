@@ -8,6 +8,7 @@ import { PortalShell, type NavItem } from "@/components/shell/portal-shell";
 import {
   IconBuildings,
   IconGauge,
+  IconInvoice,
   IconPayments,
 } from "@/components/shell/icons";
 
@@ -15,6 +16,7 @@ const NAV: NavItem[] = [
   { href: "/admin", label: "Dashboard", icon: IconGauge },
   { href: "/admin/businesses", label: "Businesses", icon: IconBuildings },
   { href: "/admin/payments", label: "Payments", icon: IconPayments },
+  { href: "/admin/invoices", label: "Invoices", icon: IconInvoice },
 ];
 
 /**

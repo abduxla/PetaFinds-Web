@@ -43,3 +43,10 @@ export const IconPayments = (
     <path d="M2.5 8.5h15M5.5 12.5h3" />
   </svg>
 );
+
+export const IconInvoice = (
+  <svg {...base}>
+    <path d="M5 2.5h10a1 1 0 0 1 1 1v14l-2.5-1.5L11 17.5 8.5 16 6 17.5l-2-1.2V3.5a1 1 0 0 1 1-1Z" />
+    <path d="M7 6.5h6M7 9.5h6M7 12.5h3.5" />
+  </svg>
+);
