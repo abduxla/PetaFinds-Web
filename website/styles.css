@@ -169,9 +169,22 @@ img { max-width: 100%; display: block; }
 .brand-name { font-size: 1.2rem; color: var(--ink); }
 .brand-name b { color: var(--orange); }
 
-.nav-links { display: flex; gap: 28px; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a { color: var(--text); font-weight: 600; font-size: 0.95rem; transition: color 0.16s ease; }
 .nav-links a:hover { color: var(--teal); }
+
+/* Business Portal — prominent but on-brand: quiet teal pill that fills on hover */
+.nav-links a.nav-portal {
+  color: var(--teal);
+  border: 1.5px solid var(--teal);
+  border-radius: 999px;
+  padding: 7px 16px;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.nav-links a.nav-portal:hover {
+  background: var(--teal);
+  color: #fff;
+}
 
 /* ---------------------------- Hero ---------------------------- */
 .hero {

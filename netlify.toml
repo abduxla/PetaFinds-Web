@@ -1,2 +1,29 @@
+# PetaFinds web — marketing site + business/admin portal on one domain.
+#
+#   /            → static marketing site (website/, committed as-is)
+#   /portal/…    → Next.js static export built from portal/ at deploy time
+#
+# Netlify runs the build command from the repo root on every push to main.
+
 [build]
   publish = "website"
+  command = "cd portal && npm ci && npm run build && rm -rf ../website/portal && mkdir -p ../website/portal && cp -r out/. ../website/portal/"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Security headers for the portal (the marketing site stays as-is).
+[[headers]]
+  for = "/portal/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Hashed Next.js assets are immutable — cache them hard.
+[[headers]]
+  for = "/portal/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
