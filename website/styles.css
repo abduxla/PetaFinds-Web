@@ -1294,3 +1294,48 @@ img { max-width: 100%; display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .cursor-glow { display: none !important; } }
 @media (hover: none) { .cursor-glow { display: none !important; } }
+
+/* =====================================================================
+   BUSINESS PLANS PAGE v2 — display-only plans; all actions live in the
+   Business Portal (/portal/). Additive styles only.
+   ===================================================================== */
+
+/* Four-plan grid: 4 → 2 → 1 across breakpoints. */
+.plans-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1020px) { .plans-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .plans-4 { grid-template-columns: 1fr; } }
+
+/* Vibranium: market-leader accents. */
+.plan-leader { border: 1.5px solid var(--orange); }
+.plan-badge-accent { background: #7c3aed; }
+
+/* Hero CTA row on the business page. */
+.portal-cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+/* Closing portal panel. */
+.portal-panel {
+  text-align: center; background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 48px 28px; box-shadow: var(--shadow-sm);
+}
+.portal-panel h2 { font-size: 1.6rem; }
+.portal-panel p { color: var(--muted); margin: 10px 0 22px; }
+.portal-panel-note { font-size: 0.85rem; margin: 18px 0 0 !important; }
+
+/* Keep the Business Portal button visible on phones — the generic
+   nav-cta is hidden ≤600px, but the portal entry must always be one
+   tap away. */
+@media (max-width: 600px) {
+  .nav-cta.nav-cta-portal { display: inline-flex; }
+  .portal-cta-row .btn { width: 100%; justify-content: center; }
+}
+
+/* Mobile-only Business Portal pill on the home header (nav-links and the
+   app CTA are hidden ≤600px, so this is the phone entry point). */
+.nav-portal-mobile {
+  display: none;
+  color: var(--teal); font-weight: 700; font-size: 0.9rem;
+  border: 1.5px solid var(--teal); border-radius: 999px; padding: 7px 14px;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.nav-portal-mobile:hover { background: var(--teal); color: #fff; }
+@media (max-width: 600px) { .nav-portal-mobile { display: inline-flex; } }

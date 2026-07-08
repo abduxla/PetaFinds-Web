@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PetaFinds for Business — Plans &amp; Payment</title>
+    <title>PetaFinds for Business — Membership Plans</title>
     <meta
       name="description"
-      content="Upgrade your PetaFinds shop. Choose a plan, pay by bank transfer, and upload your payment slip. Our team verifies and activates your perks manually."
+      content="Grow your shop on PetaFinds. Compare Silver, Gold, Platinum and Vibranium membership plans, then manage everything — payments, invoices and renewals — in the Business Portal."
     />
     <meta name="robots" content="noindex, follow" />
     <meta name="theme-color" content="#0a4a4a" />
@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <script>document.documentElement.className += " js";</script>
-    <link rel="stylesheet" href="../styles.css?v=15" />
+    <link rel="stylesheet" href="../styles.css?v=16" />
   </head>
   <body>
     <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
@@ -33,7 +33,7 @@
           <a href="/#business">For Businesses</a>
           <a href="/#features">Features</a>
         </nav>
-        <a class="btn btn-primary btn-sm nav-cta" href="#choose">Upgrade my shop</a>
+        <a class="btn btn-primary btn-sm nav-cta nav-cta-portal" href="/portal/">Business Portal</a>
       </div>
     </header>
 
@@ -44,80 +44,95 @@
           <span class="eyebrow">PetaFinds for Business</span>
           <h1>Get found by more buyers in&nbsp;Pettah.</h1>
           <p class="lead">
-            Every shop starts free. Upgrade your plan to rise above standard shops, get featured, and unlock
-            performance analytics. Pay by bank transfer, upload your slip, and our team activates your perks.
+            Every shop starts free. Upgrade to rise above standard shops, get featured, and unlock
+            analytics — then manage your membership, payments and invoices in one place:
+            the <strong>Business Portal</strong>.
           </p>
+          <div class="portal-cta-row">
+            <a class="btn btn-primary" href="/portal/">Sign in to the Business Portal</a>
+            <a class="btn btn-outline" href="#choose">See the plans ↓</a>
+          </div>
         </div>
       </section>
 
-      <!-- ===================== PLANS ===================== -->
+      <!-- ===================== PLANS (display only — actions live in the portal) ===================== -->
       <section class="section" id="choose">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">Choose your level</span>
+            <span class="eyebrow">Membership plans</span>
             <h2>Plans built to get you discovered.</h2>
-            <p>Your shop is already on PetaFinds for free on the <strong>Listed</strong> level. Pick an upgrade below.</p>
+            <p>Every shop starts on <strong>Silver</strong> — free, forever. Upgrade any time from your Business Portal.</p>
           </div>
 
-          <div class="billing-wrap">
-            <div class="billing" data-billing-toggle>
-              <button type="button" data-billing="monthly" class="active">Monthly</button>
-              <button type="button" data-billing="annual">Annual</button>
-            </div>
-            <span class="billing-save">2 months free</span>
-          </div>
-
-          <div class="plans">
-            <!-- SPOTLIGHT -->
+          <div class="plans plans-4">
+            <!-- SILVER -->
             <article class="plan">
               <div class="plan-top">
-                <h3>Spotlight</h3>
-                <p class="plan-tag">Stand out</p>
-                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
-                <!-- TODO: replace LKR 0,000 with the real Spotlight price -->
+                <h3>Silver</h3>
+                <p class="plan-tag">Start Your Digital Presence</p>
+                <div class="plan-price"><b>FREE</b></div>
               </div>
               <ul class="plan-perks">
-                <li>Up to 20 active listings</li>
-                <li>Priority placement above standard shops</li>
-                <li>Spotlight badge on your shop</li>
-                <li>Direct customer chat &amp; reviews</li>
+                <li>Up to 10 products</li>
+                <li>Business profile</li>
+                <li>Appear in search</li>
+                <li>Appear on the map</li>
+                <li>Receive inquiries</li>
               </ul>
-              <button class="btn btn-outline btn-block plan-pick" data-plan="Spotlight">Choose Spotlight</button>
+              <a class="btn btn-outline btn-block" href="/portal/">Get started free</a>
             </article>
 
-            <!-- PRIME (most popular) -->
+            <!-- GOLD -->
+            <article class="plan">
+              <div class="plan-top">
+                <h3>Gold</h3>
+                <p class="plan-tag">Get Found By More Customers</p>
+                <div class="plan-price"><b>LKR 5,490</b><span>/ month</span></div>
+              </div>
+              <ul class="plan-perks">
+                <li>Up to 50 products</li>
+                <li>Higher search ranking</li>
+                <li>Featured business badge</li>
+                <li>Product insights</li>
+                <li>Monthly business report</li>
+              </ul>
+              <a class="btn btn-outline btn-block" href="/portal/">Upgrade in the portal</a>
+            </article>
+
+            <!-- PLATINUM (most popular) -->
             <article class="plan plan-featured">
-              <span class="plan-badge">Most popular</span>
+              <span class="plan-badge">★ Most popular</span>
               <div class="plan-top">
-                <h3>Prime</h3>
-                <p class="plan-tag">Get noticed everywhere</p>
-                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
-                <!-- TODO: replace LKR 0,000 with the real Prime price -->
+                <h3>Platinum</h3>
+                <p class="plan-tag">Grow Faster &amp; Generate More Leads</p>
+                <div class="plan-price"><b>LKR 9,999</b><span>/ month</span></div>
               </div>
               <ul class="plan-perks">
-                <li>Up to 50 active listings</li>
-                <li><strong>Featured on the home screen</strong></li>
-                <li>Prime badge buyers look for</li>
-                <li><strong>Full analytics</strong> — views, chats &amp; top products</li>
+                <li>Up to 250 products</li>
+                <li><strong>Premium search placement</strong></li>
+                <li><strong>Business analytics</strong></li>
+                <li>Priority exposure</li>
+                <li>Verified business badge</li>
               </ul>
-              <button class="btn btn-primary btn-block plan-pick" data-plan="Prime">Choose Prime</button>
+              <a class="btn btn-primary btn-block" href="/portal/">Upgrade in the portal</a>
             </article>
 
-            <!-- ELITE -->
-            <article class="plan">
+            <!-- VIBRANIUM -->
+            <article class="plan plan-leader">
+              <span class="plan-badge plan-badge-accent">👑 Market leader</span>
               <div class="plan-top">
-                <h3>Elite</h3>
-                <p class="plan-tag">Own your category</p>
-                <div class="plan-price"><b data-monthly="LKR 0,000" data-annual="LKR 00,000">LKR 0,000</b><span data-period>/ month</span></div>
-                <!-- TODO: replace LKR 0,000 with the real Elite price -->
+                <h3>Vibranium</h3>
+                <p class="plan-tag">Maximum Visibility &amp; Market Leadership</p>
+                <div class="plan-price"><b>LKR 24,999</b><span>/ month</span></div>
               </div>
               <ul class="plan-perks">
-                <li><strong>Unlimited</strong> active listings</li>
-                <li>Top placement across the whole app</li>
-                <li>Elite badge — the highest mark of trust</li>
-                <li>Full analytics + priority support</li>
+                <li><strong>Unlimited</strong> products</li>
+                <li><strong>Highest search priority</strong></li>
+                <li>Homepage promotion eligibility</li>
+                <li>Recommended supplier eligibility</li>
+                <li>Advanced business insights</li>
               </ul>
-              <button class="btn btn-accent btn-block plan-pick" data-plan="Elite">Choose Elite</button>
+              <a class="btn btn-accent btn-block" href="/portal/">Upgrade in the portal</a>
             </article>
           </div>
         </div>
@@ -127,109 +142,29 @@
       <section class="section section-alt">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">How activation works</span>
-            <h2>Three steps — verified by a human.</h2>
-            <p>There is no automatic billing. Our team checks every payment against our bank records, then activates your plan in the app — usually within 24 hours.</p>
+            <span class="eyebrow">How it works</span>
+            <h2>Everything runs through your Business Portal.</h2>
+            <p>No card details, no auto-billing. Pay by bank transfer, upload your receipt in the portal, and a human verifies it — usually within 24 hours.</p>
           </div>
           <div class="pay-steps">
-            <div class="pay-step"><span>1</span><div><b>Transfer the amount</b><p>Send your chosen plan's fee to our bank account (details below). Keep the bank reference number.</p></div></div>
-            <div class="pay-step"><span>2</span><div><b>Upload your slip</b><p>Fill in the form below with your shop's email and the payment reference, and attach your bank slip or receipt.</p></div></div>
-            <div class="pay-step"><span>3</span><div><b>We verify &amp; activate</b><p>We match the reference to our account and switch on your perks in the app. You'll get a confirmation by email.</p></div></div>
+            <div class="pay-step"><span>1</span><div><b>Sign in to the portal</b><p>Use your PetaFinds business account at <a href="/portal/">petafinds.lk/portal</a>. Your dashboard shows your plan, renewal date and benefits.</p></div></div>
+            <div class="pay-step"><span>2</span><div><b>Pay &amp; upload your receipt</b><p>Bank details are right there on the Payments page. Transfer, then attach your slip with the reference number — it takes a minute.</p></div></div>
+            <div class="pay-step"><span>3</span><div><b>We verify &amp; you're live</b><p>Our team confirms the payment, your plan activates instantly and a numbered invoice lands in your Invoice Centre and inbox.</p></div></div>
           </div>
         </div>
       </section>
 
-      <!-- ===================== BANK DETAILS + FORM ===================== -->
-      <section class="section" id="pay">
-        <div class="container pay-grid">
-          <!-- Bank details -->
-          <aside class="bank-box">
-            <h3>Bank transfer details</h3>
-            <!-- TODO: replace the bracketed placeholders with your real bank details -->
-            <dl class="bank-list">
-              <div><dt>Account name</dt><dd>[ Account name ]</dd></div>
-              <div><dt>Bank</dt><dd>[ Bank name ]</dd></div>
-              <div><dt>Account number</dt><dd>[ 000000000000 ]</dd></div>
-              <div><dt>Branch</dt><dd>[ Branch ]</dd></div>
-              <div><dt>Reference to use</dt><dd>Your shop name + email</dd></div>
-            </dl>
-            <p class="bank-note">
-              Use your shop's name as the transfer reference so we can match it quickly. Questions?
-              <a href="tel:+94777128291">+94&nbsp;777&nbsp;128&nbsp;291</a> ·
-              <a href="mailto:info@petafinds.lk">info@petafinds.lk</a>
+      <!-- ===================== FINAL CTA ===================== -->
+      <section class="section" id="portal-cta">
+        <div class="container">
+          <div class="portal-panel">
+            <h2>Ready to grow your shop?</h2>
+            <p>Memberships, payments, invoices, renewals — all managed in one secure place.</p>
+            <a class="btn btn-primary" href="/portal/">Open the Business Portal</a>
+            <p class="portal-panel-note">
+              New to PetaFinds? Register your business in the app first —
+              your portal access follows your approval.
             </p>
-          </aside>
-
-          <!-- Submission form (Netlify Forms — no app/Firebase connection) -->
-          <div class="form-card">
-            <h3>Upload your payment</h3>
-            <form
-              name="business-upgrade"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              enctype="multipart/form-data"
-              action="/business/thank-you/"
-            >
-              <input type="hidden" name="form-name" value="business-upgrade" />
-              <p class="hp" hidden><label>Don't fill this in: <input name="bot-field" /></label></p>
-
-              <label class="field">
-                <span>Shop / business name <em>*</em></span>
-                <input type="text" name="business-name" required autocomplete="organization" />
-              </label>
-
-              <label class="field">
-                <span>Email used in the PetaFinds app <em>*</em></span>
-                <input type="email" name="email" required autocomplete="email" placeholder="so we can match your account" />
-              </label>
-
-              <label class="field">
-                <span>Phone / WhatsApp</span>
-                <input type="tel" name="phone" autocomplete="tel" />
-              </label>
-
-              <div class="field-row">
-                <label class="field">
-                  <span>Plan <em>*</em></span>
-                  <select name="plan" id="plan-select" required>
-                    <option value="" disabled selected>Select a plan</option>
-                    <option value="Spotlight">Spotlight</option>
-                    <option value="Prime">Prime</option>
-                    <option value="Elite">Elite</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Amount paid (LKR)</span>
-                  <input type="text" name="amount" inputmode="numeric" />
-                </label>
-              </div>
-
-              <div class="field-row">
-                <label class="field">
-                  <span>Payment reference / transaction ID <em>*</em></span>
-                  <input type="text" name="reference" required placeholder="from your bank slip" />
-                </label>
-                <label class="field">
-                  <span>Payment date</span>
-                  <input type="date" name="payment-date" />
-                </label>
-              </div>
-
-              <label class="field">
-                <span>Bank slip / receipt <em>*</em></span>
-                <input type="file" name="payment-slip" accept="image/*,application/pdf" required />
-                <small>JPG, PNG or PDF. A clear photo of the slip is fine.</small>
-              </label>
-
-              <label class="field">
-                <span>Notes (optional)</span>
-                <textarea name="notes" rows="3"></textarea>
-              </label>
-
-              <button type="submit" class="btn btn-primary btn-block">Submit for verification</button>
-              <p class="form-note">We verify manually and never store card details. Submitting does not auto-charge or auto-activate anything.</p>
-            </form>
           </div>
         </div>
       </section>
@@ -244,15 +179,5 @@
     </footer>
 
     <script src="../app.js?v=8" defer></script>
-    <script>
-      // Pre-select the plan in the form when a plan card is chosen, then scroll to it.
-      document.querySelectorAll(".plan-pick").forEach(function (b) {
-        b.addEventListener("click", function () {
-          var sel = document.getElementById("plan-select");
-          if (sel) sel.value = b.dataset.plan;
-          document.getElementById("pay").scrollIntoView({ behavior: "smooth" });
-        });
-      });
-    </script>
   </body>
 </html>
