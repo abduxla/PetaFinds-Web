@@ -11,7 +11,12 @@ import {
 } from "@/config/tiers";
 import { daysUntil, formatDate, formatDateTime, formatLkr } from "@/lib/format";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
-import { Badge, StatusBadge, TierBadge } from "@/components/ui/badge";
+import {
+  Badge,
+  FoundingBadge,
+  StatusBadge,
+  TierBadge,
+} from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export default function DashboardPage() {
@@ -46,6 +51,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <FoundingBadge founding={business.foundingMember} />
           <TierBadge tier={effective} />
           <StatusBadge
             isVerified={business.isVerified}

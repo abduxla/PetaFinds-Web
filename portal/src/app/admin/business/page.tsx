@@ -21,7 +21,12 @@ import {
 import { formatDate, formatLkr } from "@/lib/format";
 import { provisionPortalAccess, callableError } from "@/lib/callables";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
-import { Badge, StatusBadge, TierBadge } from "@/components/ui/badge";
+import {
+  Badge,
+  FoundingBadge,
+  StatusBadge,
+  TierBadge,
+} from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FullScreenSpinner, Spinner } from "@/components/ui/spinner";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -123,6 +128,7 @@ function BusinessDetail() {
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <FoundingBadge founding={business.foundingMember} />
           <TierBadge tier={effectiveTier(business.tier, business.tierValidUntil)} />
           <StatusBadge
             isVerified={business.isVerified}

@@ -65,6 +65,8 @@ export interface Business {
   isVerified: boolean;
   /** Portal-era field; absent on legacy docs (treated as not suspended). */
   suspended: boolean;
+  /** First-50 honor — stamped only by the backend (onBusinessCreated). */
+  foundingMember: boolean;
   ratingAvg: number;
   ratingCount: number;
   tier: TierId;
@@ -94,6 +96,7 @@ export function businessFromDoc(
     bannerUrl: (d.bannerUrl as string) ?? "",
     isVerified: d.isVerified === true,
     suspended: d.suspended === true,
+    foundingMember: d.foundingMember === true,
     ratingAvg: typeof d.ratingAvg === "number" ? d.ratingAvg : 0,
     ratingCount: typeof d.ratingCount === "number" ? d.ratingCount : 0,
     tier: tierFromId(d.tier as string | undefined),

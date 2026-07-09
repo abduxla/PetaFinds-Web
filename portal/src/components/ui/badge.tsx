@@ -2,7 +2,14 @@ import { type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { planOf } from "@/config/tiers";
 
-type Tone = "neutral" | "teal" | "orange" | "success" | "danger" | "violet";
+type Tone =
+  | "neutral"
+  | "teal"
+  | "orange"
+  | "success"
+  | "danger"
+  | "violet"
+  | "gold";
 
 const tones: Record<Tone, string> = {
   neutral: "bg-bg-section text-ink-700",
@@ -11,7 +18,14 @@ const tones: Record<Tone, string> = {
   success: "bg-success-soft text-success",
   danger: "bg-danger-soft text-danger",
   violet: "bg-[#f3edfd] text-tier-vibranium",
+  gold: "bg-[#fff8e1] text-[#b07b10] border border-[#e0a82e]/50",
 };
+
+/** First-50 honor pill — renders nothing unless earned. */
+export function FoundingBadge({ founding }: { founding: boolean }) {
+  if (!founding) return null;
+  return <Badge tone="gold">🏅 Founding Business</Badge>;
+}
 
 export function Badge({
   tone = "neutral",
