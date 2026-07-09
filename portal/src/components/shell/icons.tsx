@@ -44,6 +44,13 @@ export const IconPayments = (
   </svg>
 );
 
+export const IconBell = (
+  <svg {...base}>
+    <path d="M10 2.5a5 5 0 0 1 5 5v2.8l1.5 2.7a.6.6 0 0 1-.5.9H4a.6.6 0 0 1-.5-.9L5 10.3V7.5a5 5 0 0 1 5-5Z" />
+    <path d="M8.2 16.5a2 2 0 0 0 3.6 0" />
+  </svg>
+);
+
 export const IconInvoice = (
   <svg {...base}>
     <path d="M5 2.5h10a1 1 0 0 1 1 1v14l-2.5-1.5L11 17.5 8.5 16 6 17.5l-2-1.2V3.5a1 1 0 0 1 1-1Z" />

@@ -13,6 +13,7 @@ import {
   IconPayments,
 } from "@/components/shell/icons";
 import { ForcePasswordChange } from "@/components/force-password-change";
+import { NotificationsNavIcon } from "@/components/notifications-nav-icon";
 import { Button } from "@/components/ui/button";
 import { Wordmark } from "@/components/shell/brand";
 
@@ -21,6 +22,11 @@ const NAV: NavItem[] = [
   { href: "/membership", label: "Membership", icon: IconMembership },
   { href: "/payments", label: "Payments", icon: IconPayments },
   { href: "/invoices", label: "Invoices", icon: IconInvoice },
+  {
+    href: "/notifications",
+    label: "Notifications",
+    icon: <NotificationsNavIcon />,
+  },
 ];
 
 /**

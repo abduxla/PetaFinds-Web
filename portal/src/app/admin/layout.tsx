@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth-context";
 import { FullScreenSpinner } from "@/components/ui/spinner";
 import { PortalShell, type NavItem } from "@/components/shell/portal-shell";
 import {
+  IconBell,
   IconBuildings,
   IconGauge,
   IconInvoice,
@@ -19,6 +20,7 @@ const NAV: NavItem[] = [
   { href: "/admin/payments", label: "Payments", icon: IconPayments },
   { href: "/admin/invoices", label: "Invoices", icon: IconInvoice },
   { href: "/admin/upgrades", label: "Upgrades", icon: IconMembership },
+  { href: "/admin/notifications", label: "Broadcast", icon: IconBell },
 ];
 
 /**
