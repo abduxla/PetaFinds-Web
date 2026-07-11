@@ -1339,3 +1339,33 @@ img { max-width: 100%; display: block; }
 }
 .nav-portal-mobile:hover { background: var(--teal); color: #fff; }
 @media (max-width: 600px) { .nav-portal-mobile { display: inline-flex; } }
+
+/* =====================================================================
+   /download — App Store QR page. Additive styles only.
+   ===================================================================== */
+.download-grid {
+  display: grid; grid-template-columns: auto 1fr; gap: 44px;
+  align-items: center; max-width: 760px; margin: 0 auto;
+}
+.download-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 26px; text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.download-qr { display: block; width: 220px; height: 220px; border-radius: 12px; }
+.download-hint { margin: 14px auto 0; max-width: 220px; color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+.download-copy h2 { font-size: 1.5rem; }
+.download-copy > p { color: var(--muted); margin: 10px 0 18px; max-width: 46ch; }
+.download-points { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.download-points li { position: relative; padding-left: 26px; font-size: 0.95rem; }
+.download-points li::before {
+  content: "✓"; position: absolute; left: 0; top: 0;
+  color: var(--teal); font-weight: 800;
+}
+.download-note { margin-top: 22px; font-size: 0.88rem; color: var(--muted); }
+.download-note a { color: var(--teal); font-weight: 700; }
+@media (max-width: 700px) {
+  .download-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .download-copy h2 { text-align: center; }
+  .download-points li { text-align: left; }
+}
