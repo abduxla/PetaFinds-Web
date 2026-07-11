@@ -7,6 +7,7 @@ import { BusinessProvider, useBusiness } from "@/lib/business-context";
 import { FullScreenSpinner } from "@/components/ui/spinner";
 import { PortalShell, type NavItem } from "@/components/shell/portal-shell";
 import {
+  IconGauge,
   IconHome,
   IconInvoice,
   IconMembership,
@@ -19,6 +20,7 @@ import { Wordmark } from "@/components/shell/brand";
 
 const NAV: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: IconHome },
+  { href: "/analytics", label: "Analytics", icon: IconGauge },
   { href: "/membership", label: "Membership", icon: IconMembership },
   { href: "/payments", label: "Payments", icon: IconPayments },
   { href: "/invoices", label: "Invoices", icon: IconInvoice },
