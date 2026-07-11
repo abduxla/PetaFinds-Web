@@ -367,7 +367,14 @@ export function PlatinumAnalytics({
 
   return (
     <div className="space-y-6">
-      <PeriodFilter value={period} onChange={setPeriod} />
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <PeriodFilter value={period} onChange={setPeriod} />
+        <Link href={`/analytics-report/?period=${period}`}>
+          <Button variant="secondary" size="sm">
+            PDF report
+          </Button>
+        </Link>
+      </div>
 
       {/* KPI row */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
