@@ -23,6 +23,7 @@ import {
   Movement,
   TrendChart,
 } from "@/components/charts";
+import { ExecInsightsCard, MilestonesSection } from "./milestones";
 import { Card, CardBody, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -459,6 +460,18 @@ export function PlatinumAnalytics({
           />
         </CardBody>
       </Card>
+
+      {/* Executive insights — Vibranium: the platform explains the data */}
+      {executive && (
+        <ExecInsightsCard
+          insights={insights}
+          daily={daily}
+          titleOf={titleOf}
+        />
+      )}
+
+      {/* Milestones — achievements + progress toward the next ones */}
+      <MilestonesSection insights={insights} />
 
       {/* Product performance */}
       <ProductTable
